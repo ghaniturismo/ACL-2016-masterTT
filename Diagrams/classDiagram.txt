@@ -1,19 +1,28 @@
 @startuml
-skinparam classAttributeIconSize 0 
-
-World --> SpaceInvaders
-SpaceInvaders --> ShipListener
+GameElement <|-- GameMoveableElement
+GameMoveableElement <|-- SpaceInvaders
 
 class Main {
 }
 
-class ShipListener {
-}
-
 class World {
+#sapce
+#world_height
+#world_width
 }
 
 class SpaceInvaders {
 }
 
+class GameMoveableElement {
+}
+
+class GameElement {
+#hauteur
+#largeur
+#world
+#x
+#y
+
+}
 @enduml
