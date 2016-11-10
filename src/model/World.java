@@ -2,6 +2,9 @@ package model;
 
 public class World {
 		protected SpaceInvaders space;
+		protected float World_width,World_height;
+
+		
 	    public SpaceInvaders getSpace() {
 			return space;
 		}
@@ -30,14 +33,11 @@ public class World {
 		public void setWorld_height(float world_height) {
 			World_height = world_height;
 		}
-
-
-		protected float World_width,World_height;
 		
 	    
 	    public World(){
 	    	 this.World_width = 30;
-	         this.World_height = 30;
+	         this.World_height = 20;
 	         this.space = new SpaceInvaders(15,15,this);
 	    }
 		

@@ -7,7 +7,10 @@ public abstract class GameMoveableElement extends GameElement {
 	}
 	
 	
+	public void turnRight(){
+    }
 	
-	
-	
+	public void turnLeft(){
+      
+    }
 }

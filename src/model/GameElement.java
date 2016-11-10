@@ -2,6 +2,11 @@ package model;
 
 public abstract class GameElement {
 	protected float x;
+	protected float y;
+	protected World world;
+    protected float largeur,hauteur;
+
+    
 	public float getX() {
 		return x;
 	}
@@ -17,10 +22,6 @@ public abstract class GameElement {
 	public void setY(float y) {
 		this.y = y;
 	}
-	protected float y;
-	protected World world;
-    protected float largeur,hauteur;
-
 
 
 public GameElement(float x,float y,World w){
