@@ -6,6 +6,8 @@ import model.World;
 
 public class Main {
 
+	private static Scanner sc;
+
 	/**
 	 * @param args
 	 */
@@ -21,7 +23,7 @@ public class Main {
 		System.out.println("La carte fait : " + longueur+ "-" + hauteur);
 		System.out.println("La position de la fusée : " + spaceInvaders.getX() + "-" + spaceInvaders.getY());
 
-		System.out.println("Veuillez cliqué sur 1/2 pour effectuée un deplacement 1=droite / 2=gauche");
+		System.out.println("Veuillez cliqué sur D/G pour effectuée un deplacement Droite / Gauche");
 		System.out.println("	ou Q pour quitter");
 		
 		
@@ -29,25 +31,26 @@ public class Main {
 		
 		while(repeter == true ){
 
-			Scanner sc = new Scanner(System.in);
-			int str = sc.nextInt();
-			
-				if(str == 1 ){
+			sc = new Scanner(System.in);
+			String str = sc.nextLine();
+
+				if( str.contentEquals("D") ){
 					spaceInvaders.turnRight();
 				}
 				
-				if(str == 2){
+				if( str.contentEquals("G") ){
 					spaceInvaders.turnLeft();
-					
 				}
-				System.out.println("----------------- :");
-				System.out.println("Veuillez cliqué sur 1/2 pour effectuée un deplacement 1=droite / 2=gauche");
-				System.out.println("	ou Q pour quitter");
 				
-				if(str == 3){
+				if(str.contentEquals("Q")){
 					System.out.println("Je quitte");
 					repeter = false;
+				}else {
+					System.out.println("\n");
+					System.out.println("Veuillez cliqué sur D/G pour effectuée un deplacement Droite / Gauche");
+					System.out.println("------------------------ ou Q pour quitter---------------------------\n");
 				}
+				
 				
 		}
 	
