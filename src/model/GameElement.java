@@ -4,7 +4,11 @@ public abstract class GameElement {
 	protected float x;
 	protected float y;
 	protected World world;
-    protected float largeur,hauteur;
+	
+    public World getWorld() {
+		return world;
+	}
+	protected float largeur,hauteur;
 
     
 	public float getX() {
@@ -35,6 +39,7 @@ public GameElement(float x,float y,World w){
 	public float getLargeur(){
 	    return this.largeur;
 	}
+	
 	public void setLargeur(int l){
 	    this.largeur = l;
 	}
@@ -43,6 +48,7 @@ public GameElement(float x,float y,World w){
 	public float getHauteur() {
 	    return hauteur;
 	}
+	
 	public void setHauteur(int hauteur) {
 	    this.hauteur = hauteur;
 	}

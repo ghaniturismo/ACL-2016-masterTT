@@ -1,6 +1,7 @@
 package model;
 
 public class World {
+	
 		protected SpaceInvaders space;
 		protected float World_width,World_height;
 
