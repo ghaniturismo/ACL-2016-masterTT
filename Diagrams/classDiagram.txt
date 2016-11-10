@@ -1,0 +1,19 @@
+@startuml
+skinparam classAttributeIconSize 0 
+
+World --> SpaceInvaders
+SpaceInvaders --> ShipListener
+
+class Main {
+}
+
+class ShipListener {
+}
+
+class World {
+}
+
+class SpaceInvaders {
+}
+
+@enduml
