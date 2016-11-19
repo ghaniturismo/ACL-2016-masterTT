@@ -6,11 +6,12 @@
 - ZEKRI Oussama
 - AJDARPASIC Nihad
 
-#Sprint
-Les fonctionalités à implémenter pendant le Sprint 1:
-    --> Déplacement du vaisseau, et affichage de sa position sur console.
+# Sprint
+- Les fonctionalités du Sprint 1  [V1.0]:
+    - Déplacement du vaisseau en cosole.
+    - Affichage de la position du vaisseau sur console.
 
-- Les fonctionalités à implémenter pendant le Sprint 1.1:
-    --> Déplacement du vaisseau, version graphique.
-    --> Le vaisseau peut tirer.
-    --> Un Alien déscend verticalement vers le vaisseau.
+- Les fonctionalités du Sprint 2  [V1.1]:
+    - Déplacement du vaisseau en graphique.
+    - Le vaisseau peut tirer.
+    - Un Alien déscend verticalement vers le vaisseau.
