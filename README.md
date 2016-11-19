@@ -6,7 +6,8 @@
 - ZEKRI Oussama
 - AJDARPASIC Nihad
 
-- Les fonctionalités à implémenter pendant le Sprint 1:
+#Sprint
+Les fonctionalités à implémenter pendant le Sprint 1:
     --> Déplacement du vaisseau, et affichage de sa position sur console.
 
 - Les fonctionalités à implémenter pendant le Sprint 1.1:
