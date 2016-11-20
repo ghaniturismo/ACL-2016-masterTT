@@ -7,9 +7,9 @@
 - AJDARPASIC Nihad
 
 #Compilation et éxecution
--Terminal:
-	- cd ACL2016_masterTT
-	- gradle desktop:run
+- Terminal :
+	- cd ACL2016_masterTT .
+	- gradle desktop:run .
 
 
 # Sprint
