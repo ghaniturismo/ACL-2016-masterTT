@@ -2,6 +2,8 @@ package fr.ul.acl.model;
 
 import com.badlogic.gdx.math.Vector2;
 
+import java.util.Random;
+
 public class World {
 	private Ship space;
 	private Alien alien;
@@ -10,8 +12,12 @@ public class World {
 	public World() {
 		this.World_width = 30;
 		this.World_height = 30;
+
+		Random r = new Random();
+		int valeur = r.nextInt(29);
+		System.out.printf("the value is : "+valeur);
 		this.space = new Ship(new Vector2(15, 0), this);
-		this.alien = new Alien(new Vector2(15, 29), this);
+		this.alien = new Alien(new Vector2(valeur, 29), this);
 	}
 
 	//recuperation du vaisseau

@@ -64,10 +64,10 @@ public abstract class GameMoveableElement extends GameElement {
 		}
 	}
 
-	//maj les positions des aliens.
+	//maj la position d'un Alien.
 	public void updateAlien(float delta){
 		float tmp = delta * speedAlein;
-		position.y = position.y - tmp * 12;
+		position.y = position.y - tmp;
 
 	}
 
