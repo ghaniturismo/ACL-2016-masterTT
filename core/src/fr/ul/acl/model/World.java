@@ -1,18 +1,27 @@
 package fr.ul.acl.model;
 
+import com.badlogic.gdx.math.Vector2;
+
 public class World {
 	private Ship space;
+	private Alien alien;
 	private float World_width, World_height;
 
 	public World() {
 		this.World_width = 30;
 		this.World_height = 30;
-		this.space = new Ship(15, 0, this);
+		this.space = new Ship(new Vector2(15, 0), this);
+		this.alien = new Alien(new Vector2(15, 29), this);
 	}
 
-	//recuperation de la fusee
+	//recuperation du vaisseau
 	public Ship getSpace() {
 		return space;
+	}
+
+	//recuperation d'un alien.
+	public Alien getAlien() {
+		return alien;
 	}
 
 	//maj de la fusee

@@ -1,15 +1,14 @@
 package fr.ul.acl.model;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
 
 public abstract class GameElement {
-	private float x;
-	private float y;
+	Vector2 position;
 	private World world;
 
-	public GameElement(float x, float y, World w) {
-		this.x = x;
-		this.y = y;
+	public GameElement(Vector2 position, World w) {
+		this.position = position;
 		this.world = w;
 	}
 
@@ -18,26 +17,9 @@ public abstract class GameElement {
 		return world;
 	}
 
-	// recuperer la valeur de x
-	public float getX() {
-		return x;
+	public Vector2 getPosition(){
+		return position;
 	}
-
-	// maj la valeur de x
-	public void setX(float x) {
-		this.x = x;
-	}
-
-	// recuperer la valeur de y
-	public float getY() {
-		return y;
-	}
-
-	// maj la valeur de y
-	public void setY(float y) {
-		this.y = y;
-	}
-
 	public abstract Texture getTexture();
 
 }
