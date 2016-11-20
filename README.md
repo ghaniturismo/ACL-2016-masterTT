@@ -6,6 +6,12 @@
 - ZEKRI Oussama
 - AJDARPASIC Nihad
 
+#Compilation et éxecution
+-Terminal
+-cd ACL2016_masterTT
+-gradle desktop:run
+
+
 # Sprint
 - Les fonctionalités du Sprint 1  [V1.0]:
     - Déplacement du vaisseau en cosole.

@@ -6,37 +6,39 @@ import com.badlogic.gdx.InputProcessor;
 
 import fr.ul.acl.model.Ship;
 
-public class GameListener implements InputProcessor{
+public class GameListener implements InputProcessor {
 	private Ship ship;
 
-    public GameListener( Ship ship2) {
-        this.ship = ship2;
-    }
+	public GameListener(Ship ship2) {
+		this.ship = ship2;
+	}
 
-    public boolean keyDown(int keycode) {
-        switch (keycode) {
-	        	case Input.Keys.UP:
-	            this.ship.DirectionUP();
-	           break;
-	        	case Input.Keys.DOWN:
-	           this.ship.DirectionDown();
-	           break;
-	            case Input.Keys.LEFT:
-	                this.ship.DirectionLeft();
-	                break;
-	            case Input.Keys.RIGHT:
-	                this.ship.DirectionRight();
-	                break;
-	            case Input.Keys.ESCAPE:
-	                Gdx.app.exit();
-	                break;
-	        }
-        return true;
-    }
+	// permet de choisir la direction selon les fleches
+	public boolean keyDown(int keycode) {
+		switch (keycode) {
+		case Input.Keys.UP:
+			this.ship.DirectionUP();
+			break;
+		case Input.Keys.DOWN:
+			this.ship.DirectionDown();
+			break;
+		case Input.Keys.LEFT:
+			this.ship.DirectionLeft();
+			break;
+		case Input.Keys.RIGHT:
+			this.ship.DirectionRight();
+			break;
+		case Input.Keys.ESCAPE:
+			Gdx.app.exit();
+			break;
+		}
+		return true;
+	}
 
+	// permet de stopper le mvt quand on arrete d'appuyer sur les touches
 	@Override
 	public boolean keyUp(int keycode) {
-			ship.stop();
+		ship.stop();
 		return false;
 	}
 
