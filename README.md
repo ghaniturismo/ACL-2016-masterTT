@@ -8,8 +8,8 @@
 
 #Compilation et éxecution
 -Terminal
-	-cd ACL2016_masterTT
-	-gradle desktop:run
+	- cd ACL2016_masterTT.
+	- gradle desktop:run.
 
 
 # Sprint
