@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
 public abstract class GameElement {
-	Vector2 position;
+	private Vector2 position;
 	private World world;
 
 	public GameElement(Vector2 position, World w) {
@@ -21,6 +21,9 @@ public abstract class GameElement {
 		return position;
 	}
 
+	public void setPosition(Vector2 position) {
+		this.position = position;
+	}
 	public abstract Texture getTexture();
 
 }

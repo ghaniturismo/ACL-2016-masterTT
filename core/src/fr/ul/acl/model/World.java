@@ -7,16 +7,16 @@ import java.util.Random;
 public class World {
 	private Ship space;
 	private Alien alien;
-	private float World_width, World_height;
+	private float world_width, world_height;
 
 	public World() {
-		this.World_width = 30;
-		this.World_height = 30;
+		this.world_width = 30;
+		this.world_height = 30;
 		//alien decend d'une position aleatoire
 		Random r = new Random();
-		int valeur = r.nextInt(29);
+		int valeur = r.nextInt((int) world_width);
 		this.space = new Ship(new Vector2(15, 0), this);
-		this.alien = new Alien(new Vector2(valeur, 29), this);
+		this.alien = new Alien(new Vector2(valeur,world_height-1), this);
 	}
 
 	//recuperation du vaisseau
@@ -36,22 +36,22 @@ public class World {
 
 	//recup de la largeur du monde
 	public float getWorld_width() {
-		return World_width;
+		return world_width;
 	}
 
 	//maj de la la largeur du monde
 	public void setWorld_width(float world_width) {
-		World_width = world_width;
+		this.world_width = world_width;
 	}
 
 	//recup de la hauteur du monde
 	public float getWorld_height() {
-		return World_height;
+		return world_height;
 	}
 
 	//maj de la hauteur du monde
 	public void setWorld_height(float world_height) {
-		World_height = world_height;
+		this.world_height = world_height;
 	}
 
 }
