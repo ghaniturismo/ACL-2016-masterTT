@@ -20,6 +20,7 @@ public abstract class GameElement {
 	public Vector2 getPosition(){
 		return position;
 	}
+
 	public abstract Texture getTexture();
 
 }

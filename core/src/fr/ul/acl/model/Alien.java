@@ -16,6 +16,6 @@ public class Alien extends GameMoveableElement{
 
     //recupere la texture d'un alien
     public Texture getTexture() {
-        return TextureFactory.getInstance().getTextureShip();
+        return TextureFactory.getInstance().getTextureAlien();
     }
 }

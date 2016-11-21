@@ -12,10 +12,9 @@ public class World {
 	public World() {
 		this.World_width = 30;
 		this.World_height = 30;
-
+		//alien decend d'une position aleatoire
 		Random r = new Random();
 		int valeur = r.nextInt(29);
-		System.out.printf("the value is : "+valeur);
 		this.space = new Ship(new Vector2(15, 0), this);
 		this.alien = new Alien(new Vector2(valeur, 29), this);
 	}
@@ -30,7 +29,7 @@ public class World {
 		return alien;
 	}
 
-	//maj de la fusee
+	//maj du vaisseau
 	public void setSpace(Ship space) {
 		this.space = space;
 	}

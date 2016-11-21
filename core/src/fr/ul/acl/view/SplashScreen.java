@@ -25,8 +25,7 @@ public class SplashScreen extends ScreenAdapter {
 		this.img = new Texture("ul.jpg");
 		this.camera = new OrthographicCamera();
 		this.viewport = new FitViewport(img.getWidth(), img.getHeight(), camera);
-		this.camera.position.set(img.getWidth() / 2.0f, img.getHeight() / 2.0f,
-				0);
+		this.camera.position.set(img.getWidth() / 2.0f, img.getHeight() / 2.0f, 0);
 		this.camera.update();
 	}
 

@@ -9,7 +9,7 @@ public class Ship extends GameMoveableElement {
 		super(position, world);
 	}
 
-	//recupere la texture du vaisseau
+	//recupere la texture d'un vaisseau
 	public Texture getTexture() {
 		return TextureFactory.getInstance().getTextureShip();
 	}

@@ -9,7 +9,7 @@ public class SpaceInvaders extends Game {
 	SplashScreen splashScreen;
 	GameScreen gameScreen;
 
-	// creation de la fenetre de départ et de jeux
+	// creation de la fenetre de depart et de jeux
 	@Override
 	public void create() {
 		splashScreen = new SplashScreen(this);
@@ -22,7 +22,7 @@ public class SpaceInvaders extends Game {
 		setScreen(gameScreen);
 	}
 
-	// permet de passer a la fenetre de départ
+	// permet de passer a la fenetre de depart
 	public void setSplashScreen() {
 		setScreen(splashScreen);
 	}
