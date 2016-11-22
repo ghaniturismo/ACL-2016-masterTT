@@ -1,14 +1,13 @@
 package fr.ul.acl.view;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import fr.ul.acl.SpaceInvaders;
 import fr.ul.acl.controller.GameListener;
@@ -25,7 +24,7 @@ public class GameScreen extends ScreenAdapter {
 	private SpriteBatch batch;
 	private Ship ship;
 	private Alien alien;
-	private Missile missile;
+	private ArrayList<Missile>  missiles;
 	private World w;
 	
 	/* Cette classe permet de dessiner des primitives commes des rectangles, des cercles */
@@ -36,7 +35,7 @@ public class GameScreen extends ScreenAdapter {
 		this.w = new World();
 		this.ship = w.getSpace();
 		this.alien = w.getAlien();
-		this.missile = w.getMissile();
+		this.missiles = w.getMissiles();
 		this.ppux = 48;
 		this.ppuy = 48;
 		Gdx.input.setInputProcessor(new GameListener(this.ship));
@@ -66,17 +65,22 @@ public class GameScreen extends ScreenAdapter {
 		batch.draw(alien.getTexture(), alien.getPosition().x * ppux, alien.getPosition().y * ppuy, ppux, ppuy);
 		
 		//affichage des missiles
-		batch.draw(missile.getTexture(), missile.getPosition().x * ppux, missile.getPosition().y * ppuy, ppux, ppuy);
-
-        
+		for(Missile bullet : missiles){
+			bullet.updateMissile(delta);
+			if(bullet.isRemove()){
+				w.addRemoveBullet(bullet);
+			}else{
+				batch.draw(bullet.getTexture(), bullet.getPosition().x * ppux, bullet.getPosition().y * ppuy, ppux, ppuy);
+			}
+		}
+		w.removeBullet(w.getRemoveMissiles());
+		w.removeRemoveMissiles();
 
 		//maj de la position de la fusee
 		ship.update(delta);
-		alien.updateAlien(delta);
-		missile.updateMissile(delta);
+		alien.updateAlien(delta); 
 		
 		this.batch.end();
-		shape.end();
 
 	}
 

@@ -28,6 +28,9 @@ public class GameListener implements InputProcessor {
 		case Input.Keys.RIGHT:
 			this.ship.DirectionRight();
 			break;
+		case Input.Keys.SPACE:
+			this.ship.Shoot();
+			break;
 		case Input.Keys.ESCAPE:
 			Gdx.app.exit();
 			break;
@@ -38,7 +41,8 @@ public class GameListener implements InputProcessor {
 	// permet de stopper le mvt quand on arrete d'appuyer sur les touches
 	@Override
 	public boolean keyUp(int keycode) {
-		ship.stop();
+		if(keycode != Input.Keys.SPACE)
+			ship.stop();
 		return false;
 	}
 

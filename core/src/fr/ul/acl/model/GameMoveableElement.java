@@ -5,7 +5,6 @@ import com.badlogic.gdx.math.Vector2;
 public abstract class GameMoveableElement extends GameElement {
 	private float speed = 20;
 	private float speedAlein = 10;
-	private float speedMissile = 15;
 	private Vector2 position = getPosition();
 
 	private enum Direction {
@@ -14,6 +13,7 @@ public abstract class GameMoveableElement extends GameElement {
 
 	private Direction direction;
 	private boolean isMoving;
+	private boolean shootBullet;
 
 	public GameMoveableElement(Vector2 position, World world) {
 		super(position, world);
@@ -41,6 +41,10 @@ public abstract class GameMoveableElement extends GameElement {
 		this.isMoving = true;
 		this.direction = Direction.DOWN;
 	}
+	
+	public void Shoot(){
+		shootBullet = true;
+	}
 
 	// maj de la position des elements dans la fenetre
 	public void update(float delta) {
@@ -62,6 +66,9 @@ public abstract class GameMoveableElement extends GameElement {
 				break;
 			}
 		}
+		
+		if(shootBullet)
+			getWorld().addBullet();
 	}
 
 	// maj la position d'un Alien.
@@ -69,16 +76,11 @@ public abstract class GameMoveableElement extends GameElement {
 		float tmp = delta * speedAlein;
 		position.y = position.y - tmp;
 	}
-	
-	// maj la position du missile.
-	public void updateMissile(float delta) {
-		float tmp = delta * speedMissile ;
-		position.y = position.y + tmp;
-	}
 
 	// stop le mvt du gemelement dans la fenetre
 	public void stop() {
 		this.isMoving = false;
+		this.shootBullet = false;
 	}
 
 	// permet le mvt selon la direction
