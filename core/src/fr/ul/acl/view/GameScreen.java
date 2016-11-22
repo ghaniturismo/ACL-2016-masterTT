@@ -2,13 +2,18 @@ package fr.ul.acl.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import fr.ul.acl.SpaceInvaders;
 import fr.ul.acl.controller.GameListener;
 import fr.ul.acl.model.Alien;
+import fr.ul.acl.model.Missile;
 import fr.ul.acl.model.Ship;
 import fr.ul.acl.model.World;
 
@@ -20,13 +25,18 @@ public class GameScreen extends ScreenAdapter {
 	private SpriteBatch batch;
 	private Ship ship;
 	private Alien alien;
+	private Missile missile;
 	private World w;
+	
+	/* Cette classe permet de dessiner des primitives commes des rectangles, des cercles */
+	ShapeRenderer shape = new ShapeRenderer();
 
 	public GameScreen(SpaceInvaders jeux) {
 		batch = new SpriteBatch();
 		this.w = new World();
 		this.ship = w.getSpace();
 		this.alien = w.getAlien();
+		this.missile = w.getMissile();
 
 		this.ppux = 48;
 		this.ppuy = 48;
@@ -55,11 +65,23 @@ public class GameScreen extends ScreenAdapter {
 
 		//affichage d'un alien
 		batch.draw(alien.getTexture(), alien.getPosition().x * ppux, alien.getPosition().y * ppuy, ppux, ppuy);
+		
+		//affichage des missiles
+		shape.begin(ShapeType.Filled);
+        Rectangle rect = missile.getBounds();
+        float x = missile.getPosition().x + rect.x;
+        float y = missile.getPosition().y + rect.y;
+        shape.setColor(new Color(1, 1, 1, 1));
+        shape.rect(x, y, rect.width, rect.height);
+        
 
 		//maj de la position de la fusee
 		ship.update(delta);
 		alien.updateAlien(delta);
+		missile.updateMissile(delta);
+		
 		this.batch.end();
+		shape.end();
 
 	}
 

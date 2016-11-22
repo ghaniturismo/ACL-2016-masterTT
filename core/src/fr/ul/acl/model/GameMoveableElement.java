@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 public abstract class GameMoveableElement extends GameElement {
 	private float speed = 20;
 	private float speedAlein = 10;
+	private float speedMissile = 5;
 	private Vector2 position = getPosition();
 
 	private enum Direction {
@@ -67,6 +68,12 @@ public abstract class GameMoveableElement extends GameElement {
 	public void updateAlien(float delta) {
 		float tmp = delta * speedAlein;
 		position.y = position.y - tmp;
+	}
+	
+	// maj la position du missile.
+	public void updateMissile(float delta) {
+		float tmp = delta * speedMissile ;
+		position.y = position.y + tmp;
 	}
 
 	// stop le mvt du gemelement dans la fenetre

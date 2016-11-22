@@ -7,6 +7,7 @@ import java.util.Random;
 public class World {
 	private Ship space;
 	private Alien alien;
+	private Missile missile;
 	private float world_width, world_height;
 
 	public World() {
@@ -17,6 +18,8 @@ public class World {
 		int valeur = r.nextInt((int) world_width);
 		this.space = new Ship(new Vector2(15, 0), this);
 		this.alien = new Alien(new Vector2(valeur,world_height-1), this);
+		this.missile = new Missile(new Vector2(space.getPosition().x, space.getPosition().y+10), this);
+		
 	}
 
 	//recuperation du vaisseau
@@ -27,6 +30,11 @@ public class World {
 	//recuperation d'un alien.
 	public Alien getAlien() {
 		return alien;
+	}
+	
+	//recuperation du missile.
+	public Missile getMissile() {
+		return missile;
 	}
 
 	//maj du vaisseau
