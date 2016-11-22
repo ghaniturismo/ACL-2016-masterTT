@@ -18,7 +18,7 @@ public class World {
 		int valeur = r.nextInt((int) world_width);
 		this.space = new Ship(new Vector2(15, 0), this);
 		this.alien = new Alien(new Vector2(valeur,world_height-1), this);
-		this.missile = new Missile(new Vector2(space.getPosition().x, space.getPosition().y+10), this);
+		this.missile = new Missile(new Vector2(space.getPosition().x, space.getPosition().y+1), this);
 		
 	}
 

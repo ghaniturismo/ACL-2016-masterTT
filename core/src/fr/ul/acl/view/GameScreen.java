@@ -37,7 +37,6 @@ public class GameScreen extends ScreenAdapter {
 		this.ship = w.getSpace();
 		this.alien = w.getAlien();
 		this.missile = w.getMissile();
-
 		this.ppux = 48;
 		this.ppuy = 48;
 		Gdx.input.setInputProcessor(new GameListener(this.ship));
@@ -67,12 +66,8 @@ public class GameScreen extends ScreenAdapter {
 		batch.draw(alien.getTexture(), alien.getPosition().x * ppux, alien.getPosition().y * ppuy, ppux, ppuy);
 		
 		//affichage des missiles
-		shape.begin(ShapeType.Filled);
-        Rectangle rect = missile.getBounds();
-        float x = missile.getPosition().x + rect.x;
-        float y = missile.getPosition().y + rect.y;
-        shape.setColor(new Color(1, 1, 1, 1));
-        shape.rect(x, y, rect.width, rect.height);
+		batch.draw(missile.getTexture(), missile.getPosition().x * ppux, missile.getPosition().y * ppuy, ppux, ppuy);
+
         
 
 		//maj de la position de la fusee

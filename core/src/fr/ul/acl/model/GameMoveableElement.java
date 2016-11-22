@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 public abstract class GameMoveableElement extends GameElement {
 	private float speed = 20;
 	private float speedAlein = 10;
-	private float speedMissile = 5;
+	private float speedMissile = 15;
 	private Vector2 position = getPosition();
 
 	private enum Direction {
