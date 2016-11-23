@@ -73,6 +73,7 @@ public class GameScreen extends ScreenAdapter {
 				batch.draw(bullet.getTexture(), bullet.getPosition().x * ppux, bullet.getPosition().y * ppuy, ppux, ppuy);
 			}
 		}
+		System.out.println(w.getMissiles().size());
 		w.removeBullet(w.getRemoveMissiles());
 		w.removeRemoveMissiles();
 

@@ -8,7 +8,6 @@ import java.util.Random;
 public class World {
 	private Ship space;
 	private Alien alien;
-	private Missile missile;
 	private float world_width, world_height;
 	private ArrayList<Missile> missiles;
 	private ArrayList<Missile> removeMissiles;
@@ -33,11 +32,6 @@ public class World {
 	//recuperation d'un alien.
 	public Alien getAlien() {
 		return alien;
-	}
-	
-	//recuperation du missile.
-	public Missile getMissile() {
-		return missile;
 	}
 
 	//maj du vaisseau
