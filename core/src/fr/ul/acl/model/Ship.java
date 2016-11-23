@@ -5,11 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import fr.ul.acl.view.TextureFactory;
 
 public class Ship extends GameElement {
-	private enum Direction {
-		RIGHT, LEFT, UP, DOWN
-	};
-
-	private Direction direction;
+	private int direction;
 	private boolean isMoving;
 	private Vector2 position = getPosition();
 	private float speed = getSpeed();
@@ -17,33 +13,11 @@ public class Ship extends GameElement {
 	public Ship(Vector2 position, float speed, World world) {
 		super(position, speed, world);
 		this.isMoving = false;
-		this.direction = Direction.LEFT;
 	}
 
 	// recupere la texture d'un vaisseau
 	public Texture getTexture() {
 		return TextureFactory.getInstance().getTextureShip();
-	}
-
-	// fct appeler par le controlleur
-	public void DirectionRight() {
-		this.isMoving = true;
-		this.direction = Direction.RIGHT;
-	}
-
-	public void DirectionLeft() {
-		this.isMoving = true;
-		this.direction = Direction.LEFT;
-	}
-
-	public void DirectionUP() {
-		this.isMoving = true;
-		this.direction = Direction.UP;
-	}
-
-	public void DirectionDown() {
-		this.isMoving = true;
-		this.direction = Direction.DOWN;
 	}
 
 	// maj de la position des elements dans la fenetre
@@ -52,16 +26,16 @@ public class Ship extends GameElement {
 
 		if (isMoving) {
 			switch (direction) {
-			case LEFT:
+			case 1:
 				turnLeft(tmp);
 				break;
-			case RIGHT:
+			case 2:
 				turnRight(tmp);
 				break;
-			case UP:
+			case 3:
 				turnUp(tmp);
 				break;
-			case DOWN:
+			case 4:
 				turnDown(tmp);
 				break;
 			}
@@ -69,9 +43,15 @@ public class Ship extends GameElement {
 	}
 
 	// stop le mvt du gemelement dans la fenetre
-	public void stop() {
-		this.isMoving = false;
+	public void stop(boolean m) {
+		
+		this.isMoving = m;
 	}
+
+	public void setDirection(int direction) {
+		this.direction = direction;
+	}
+	
 
 	// permet le mvt selon la direction
 	public void turnLeft(float tmp) {

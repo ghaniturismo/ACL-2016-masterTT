@@ -15,18 +15,23 @@ public class GameListener implements InputProcessor {
 
 	// permet de choisir la direction selon les fleches
 	public boolean keyDown(int keycode) {
+		
 		switch (keycode) {
 		case Input.Keys.UP:
-			this.ship.DirectionUP();
+			this.ship.setDirection(3);
+			ship.stop(true);
 			break;
 		case Input.Keys.DOWN:
-			this.ship.DirectionDown();
+			this.ship.setDirection(4);
+			ship.stop(true);
 			break;
 		case Input.Keys.LEFT:
-			this.ship.DirectionLeft();
+			this.ship.setDirection(1);
+			ship.stop(true);
 			break;
 		case Input.Keys.RIGHT:
-			this.ship.DirectionRight();
+			this.ship.setDirection(2);
+			ship.stop(true);
 			break;
 		case Input.Keys.SPACE:
 			this.ship.Shoot();
@@ -42,7 +47,7 @@ public class GameListener implements InputProcessor {
 	@Override
 	public boolean keyUp(int keycode) {
 		if (keycode != Input.Keys.SPACE)
-			ship.stop();
+			ship.stop(false);
 		return false;
 	}
 
