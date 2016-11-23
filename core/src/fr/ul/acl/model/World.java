@@ -71,7 +71,7 @@ public class World {
 	
 	//ajouter un missile dans la liste
 	public void addBullet(){
-		this.missiles.add(new Missile(new Vector2(space.getPosition().x, space.getPosition().y+1),15, this));
+		this.missiles.add(new Missile(new Vector2(space.getPosition().x, space.getPosition().y+0.5f),30, this));
 	}
 	
 	//ajouter dans la liste removeMissiles les missiles a supprimer 
