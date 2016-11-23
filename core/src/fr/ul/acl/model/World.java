@@ -1,7 +1,6 @@
 package fr.ul.acl.model;
 
 import com.badlogic.gdx.math.Vector2;
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -15,7 +14,7 @@ public class World {
 	public World() {
 		this.world_width = 30;
 		this.world_height = 30;
-		//alien decend d'une position aleatoire
+		//alien descend d'une position aléatoire
 		Random r = new Random();
 		int valeur = r.nextInt((int) world_width);
 		this.space = new Ship(new Vector2(15, 0),20, this);

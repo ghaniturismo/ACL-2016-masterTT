@@ -1,13 +1,11 @@
 package fr.ul.acl.view;
 
 import java.util.ArrayList;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import fr.ul.acl.SpaceInvaders;
 import fr.ul.acl.controller.GameListener;
@@ -27,9 +25,6 @@ public class GameScreen extends ScreenAdapter {
 	private ArrayList<Missile>  missiles;
 	private World w;
 	
-	/* Cette classe permet de dessiner des primitives commes des rectangles, des cercles */
-	ShapeRenderer shape = new ShapeRenderer();
-
 	public GameScreen(SpaceInvaders jeux) {
 		batch = new SpriteBatch();
 		this.w = new World();
@@ -45,7 +40,6 @@ public class GameScreen extends ScreenAdapter {
 		this.viewport = new FitViewport(this.world_width * ppux, this.world_height * ppuy, camera);
 		this.camera.position.set(this.world_width * ppux / 2.0f, this.world_height * ppuy / 2.0f, 0);
 		this.camera.update();
-
 	}
 
 	public void resize(int width, int height) {
@@ -73,7 +67,6 @@ public class GameScreen extends ScreenAdapter {
 				batch.draw(bullet.getTexture(), bullet.getPosition().x * ppux, bullet.getPosition().y * ppuy, ppux, ppuy);
 			}
 		}
-		System.out.println(w.getMissiles().size());
 		w.removeBullet(w.getRemoveMissiles());
 		w.removeRemoveMissiles();
 
