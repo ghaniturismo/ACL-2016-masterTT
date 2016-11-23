@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import com.badlogic.gdx.math.Vector2;
 
-public class SpaceInvadersTest {
+public class Shiptest {
 	private float speed = 20;
 	private float delta = (float) 0.017519908;
 
