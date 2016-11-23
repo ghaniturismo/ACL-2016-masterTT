@@ -8,6 +8,7 @@ public class TextureFactory {
 	//image de vaisseau
 	private Texture ship = new Texture(Gdx.files.internal("images/ship.png"));
 	//image de l'alien
+	private Texture alien = new Texture(Gdx.files.internal("images/alien.png"));
 	//image du missile
 	private Texture bullet = new Texture(Gdx.files.internal("images/bullet.png"));
 
@@ -20,7 +21,7 @@ public class TextureFactory {
 	}
 
 	public Texture getTextureAlien(){
-		return  ship;
+		return  alien;
 	}
 
 	public Texture getTextureBullet() {
