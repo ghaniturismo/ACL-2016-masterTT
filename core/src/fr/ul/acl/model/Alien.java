@@ -8,7 +8,10 @@ import fr.ul.acl.view.TextureFactory;
 /**
  * Created by ghaniturismo on 20/11/16.
  */
-public class Alien extends GameMoveableElement {
+public class Alien extends GameElement {
+	private Vector2 position = getPosition();
+	private float speed = getSpeed();
+
 
 	public Alien(Vector2 position, float speed, World world) {
 		super(position, speed, world);
@@ -18,4 +21,12 @@ public class Alien extends GameMoveableElement {
 	public Texture getTexture() {
 		return TextureFactory.getInstance().getTextureAlien();
 	}
+	
+	// maj la position d'un Alien.
+		public void updateAlien(float delta) {
+			float tmp = delta * speed;
+			position.y = position.y - tmp;
+		}
+		
+
 }

@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import fr.ul.acl.view.TextureFactory;
 
-public class Missile extends GameMoveableElement {
+public class Missile extends GameElement {
 
 	private boolean remove = false;
 

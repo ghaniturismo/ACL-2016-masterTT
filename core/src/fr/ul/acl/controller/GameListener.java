@@ -41,7 +41,7 @@ public class GameListener implements InputProcessor {
 	// permet de stopper le mvt quand on arrete d'appuyer sur les touches
 	@Override
 	public boolean keyUp(int keycode) {
-		if(keycode != Input.Keys.SPACE)
+		if (keycode != Input.Keys.SPACE)
 			ship.stop();
 		return false;
 	}
