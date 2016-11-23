@@ -19,8 +19,8 @@ public class World {
 		//alien decend d'une position aleatoire
 		Random r = new Random();
 		int valeur = r.nextInt((int) world_width);
-		this.space = new Ship(new Vector2(15, 0), this);
-		this.alien = new Alien(new Vector2(valeur,world_height-1), this);
+		this.space = new Ship(new Vector2(15, 0),20, this);
+		this.alien = new Alien(new Vector2(valeur,world_height-1),10, this);
 		this.missiles = new ArrayList<Missile>();
 		this.removeMissiles = new ArrayList<Missile>();
 	}
@@ -71,7 +71,7 @@ public class World {
 	
 	//ajouter un missile dans la liste
 	public void addBullet(){
-		this.missiles.add(new Missile(new Vector2(space.getPosition().x, space.getPosition().y+1), this));
+		this.missiles.add(new Missile(new Vector2(space.getPosition().x, space.getPosition().y+1),15, this));
 	}
 	
 	//ajouter dans la liste removeMissiles les missiles a supprimer 

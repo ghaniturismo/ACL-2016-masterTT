@@ -3,8 +3,7 @@ package fr.ul.acl.model;
 import com.badlogic.gdx.math.Vector2;
 
 public abstract class GameMoveableElement extends GameElement {
-	private float speed = 20;
-	private float speedAlein = 10;
+
 	private Vector2 position = getPosition();
 
 	private enum Direction {
@@ -14,9 +13,10 @@ public abstract class GameMoveableElement extends GameElement {
 	private Direction direction;
 	private boolean isMoving;
 	private boolean shootBullet;
+	private float speed = getSpeed();
 
-	public GameMoveableElement(Vector2 position, World world) {
-		super(position, world);
+	public GameMoveableElement(Vector2 position, float speed, World world) {
+		super(position, speed, world);
 		this.isMoving = false;
 		this.direction = Direction.LEFT;
 	}
@@ -41,8 +41,8 @@ public abstract class GameMoveableElement extends GameElement {
 		this.isMoving = true;
 		this.direction = Direction.DOWN;
 	}
-	
-	public void Shoot(){
+
+	public void Shoot() {
 		shootBullet = true;
 	}
 
@@ -66,14 +66,14 @@ public abstract class GameMoveableElement extends GameElement {
 				break;
 			}
 		}
-		
-		if(shootBullet)
+
+		if (shootBullet)
 			getWorld().addBullet();
 	}
 
 	// maj la position d'un Alien.
 	public void updateAlien(float delta) {
-		float tmp = delta * speedAlein;
+		float tmp = delta * speed;
 		position.y = position.y - tmp;
 	}
 

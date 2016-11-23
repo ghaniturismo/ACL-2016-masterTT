@@ -8,14 +8,14 @@ import fr.ul.acl.view.TextureFactory;
 /**
  * Created by ghaniturismo on 20/11/16.
  */
-public class Alien extends GameMoveableElement{
+public class Alien extends GameMoveableElement {
 
-    public Alien(Vector2 position, World world) {
-        super(position, world);
-    }
+	public Alien(Vector2 position, float speed, World world) {
+		super(position, speed, world);
+	}
 
-    //recupere la texture d'un alien
-    public Texture getTexture() {
-        return TextureFactory.getInstance().getTextureAlien();
-    }
+	// recupere la texture d'un alien
+	public Texture getTexture() {
+		return TextureFactory.getInstance().getTextureAlien();
+	}
 }

@@ -6,10 +6,20 @@ import com.badlogic.gdx.math.Vector2;
 public abstract class GameElement {
 	private Vector2 position;
 	private World world;
+	private float speed;
 
-	public GameElement(Vector2 position, World w) {
+	public float getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(float speed) {
+		this.speed = speed;
+	}
+
+	public GameElement(Vector2 position, float s, World w) {
 		this.position = position;
 		this.world = w;
+		this.speed = s;
 	}
 
 	// recuperer le monde
@@ -17,13 +27,14 @@ public abstract class GameElement {
 		return world;
 	}
 
-	public Vector2 getPosition(){
+	public Vector2 getPosition() {
 		return position;
 	}
 
 	public void setPosition(Vector2 position) {
 		this.position = position;
 	}
+
 	public abstract Texture getTexture();
 
 }
