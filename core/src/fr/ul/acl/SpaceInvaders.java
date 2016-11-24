@@ -1,6 +1,7 @@
 package fr.ul.acl;
 
 import com.badlogic.gdx.Game;
+
 import fr.ul.acl.view.GameScreen;
 import fr.ul.acl.view.SplashScreen;
 

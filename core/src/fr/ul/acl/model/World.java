@@ -1,8 +1,9 @@
 package fr.ul.acl.model;
 
-import com.badlogic.gdx.math.Vector2;
 import java.util.ArrayList;
 import java.util.Random;
+
+import com.badlogic.gdx.math.Vector2;
 
 public class World {
 	private Ship space;
