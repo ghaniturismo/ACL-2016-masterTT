@@ -21,3 +21,8 @@
     - Déplacement du vaisseau en graphique.
     - Le vaisseau peut tirer.
     - Un Alien déscend verticalement vers le vaisseau.
+
+- Les fonctionalités du Sprint 3  [V2.0]:
+    - Plusieur aliens qui descende.
+    - Detection de collision entre vaisseau et Aliens.
+    - disparaition d'un alien en le touchant par une bullet
