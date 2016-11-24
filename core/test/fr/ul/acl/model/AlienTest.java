@@ -40,10 +40,28 @@ public class AlienTest {
 			Vector2 tmp =  ship.getPosition();
 			alien.setPosition(tmp);		
 			this.res = ship.hasCollisions(alien);
-			System.out.println(ship.getBB());
-			System.out.println(alien.getBB());
+
 		}
 		assertFalse(res);
 	}
 
+	@Test
+	public void AlienCollisonBullet() {
+		this.w = new World();
+		this.ship = w.getSpace();
+		this.missiles = w.getMissiles();
+		this.w.addAlien(0.6f);
+		this.w.addBullet();
+		
+		this.aliens = w.getAliens();
+		for(Alien alien : aliens){
+			for(Missile missile : missiles){
+			Vector2 tmp =  missile.getPosition();
+			alien.setPosition(tmp);		
+			this.res = missile.hasCollisions(alien);
+			
+		}
+		assertFalse(res);
+	}
+	}
 }
