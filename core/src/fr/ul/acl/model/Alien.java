@@ -1,8 +1,10 @@
 package fr.ul.acl.model;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
+import fr.ul.acl.view.BBfactory;
 import fr.ul.acl.view.TextureFactory;
 
 /**
@@ -28,6 +30,10 @@ public class Alien extends GameElement {
 			float tmp = delta * speed;
 			position.y = position.y - tmp;
 		}
+		   //Récupération de la boundingbox
+	    public Rectangle getBB() {
+	        return BBfactory.getInstance().getBBAlien().setPosition(position.x, position.y);
+	    }
 		
 		public boolean isRemove() {
 			return this.remove;

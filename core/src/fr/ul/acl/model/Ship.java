@@ -1,8 +1,9 @@
 package fr.ul.acl.model;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-
+import fr.ul.acl.view.BBfactory;
 import fr.ul.acl.view.TextureFactory;
 
 public class Ship extends GameElement {
@@ -93,5 +94,11 @@ public class Ship extends GameElement {
 
 	public void Shoot() {
 		getWorld().addBullet();
+	}
+	
+	// Récupération de la boundingbox
+	public Rectangle getBB() {
+		return BBfactory.getInstance().getBBShip()
+				.setPosition(position.x, position.y);
 	}
 }

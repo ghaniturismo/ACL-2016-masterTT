@@ -2,9 +2,6 @@ package fr.ul.acl.model;
 
 import java.util.ArrayList;
 import java.util.Random;
-
-import org.omg.CORBA.PRIVATE_MEMBER;
-
 import com.badlogic.gdx.math.Vector2;
 
 public class World {

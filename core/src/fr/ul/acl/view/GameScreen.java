@@ -63,8 +63,16 @@ public class GameScreen extends ScreenAdapter {
 			//if(alien.isRemove()){
 			//	w.addRemoveAlien(alien);
 			//}else{
-				batch.draw(alien.getTexture(), alien.getPosition().x * ppux, alien.getPosition().y * ppuy, ppux, ppuy);
-			//}
+			batch.draw(alien.getTexture(), alien.getPosition().x * ppux, alien.getPosition().y * ppuy, ppux, ppuy);
+			
+			for(Missile missile : missiles){							
+				if(alien.hasCollisions(missile))
+				System.out.println("Colison bullet alien");
+			}
+				//detection collision ship alien
+				if(ship.hasCollisions(alien))
+					System.out.println("Collison ship - alien");			
+				//}
 		}
 		this.w.addAlien(delta);
 		//affichage des missiles
@@ -82,6 +90,7 @@ public class GameScreen extends ScreenAdapter {
 		//maj de la position de la fusee
 		ship.update(delta);
 		
+
 		this.batch.end();
 
 	}
