@@ -112,4 +112,5 @@ public class ShipTest {
 		ship.turnUp(tmp1);
 		assertTrue(tmp_h - 1 == ship.getPosition().y);
 	}
+	
 }
