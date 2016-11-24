@@ -1,6 +1,7 @@
 package fr.ul.acl.model;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public abstract class GameElement {
@@ -35,6 +36,14 @@ public abstract class GameElement {
 		this.position = position;
 	}
 
+	 //test la collision
+    public boolean hasCollisions(GameElement ge){
+        Rectangle bbox = ge.getBB();
+        return this.getBB().overlaps(bbox);
+    }
+    
+    public abstract Rectangle getBB();
+    
 	public abstract Texture getTexture();
 
 }

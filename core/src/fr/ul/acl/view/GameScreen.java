@@ -67,6 +67,10 @@ public class GameScreen extends ScreenAdapter {
 				w.addRemoveBullet(bullet);
 			}else{
 				batch.draw(bullet.getTexture(), bullet.getPosition().x * ppux, bullet.getPosition().y * ppuy, ppux, ppuy);
+				if(alien.hasCollisions(bullet))
+					System.out.println("Colison bullet alien");
+
+
 			}
 		}
 		w.removeBullet(w.getRemoveMissiles());
@@ -76,6 +80,10 @@ public class GameScreen extends ScreenAdapter {
 		ship.update(delta);
 		alien.updateAlien(delta); 
 		
+		//detection collision ship alien
+		if(ship.hasCollisions(alien))
+			System.out.println("Collison ship - alien");
+			
 		this.batch.end();
 
 	}
