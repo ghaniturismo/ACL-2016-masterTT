@@ -1,12 +1,14 @@
 package fr.ul.acl.view;
 
 import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+
 import fr.ul.acl.SpaceInvaders;
 import fr.ul.acl.controller.GameListener;
 import fr.ul.acl.model.Alien;
@@ -21,7 +23,7 @@ public class GameScreen extends ScreenAdapter {
 	private FitViewport viewport;
 	private SpriteBatch batch;
 	private Ship ship;
-	private Alien alien;
+	private ArrayList<Alien>  aliens;
 	private ArrayList<Missile>  missiles;
 	private World w;
 	
@@ -29,7 +31,7 @@ public class GameScreen extends ScreenAdapter {
 		batch = new SpriteBatch();
 		this.w = new World();
 		this.ship = w.getSpace();
-		this.alien = w.getAlien();
+		this.aliens = w.getAliens();
 		this.missiles = w.getMissiles();
 		this.ppux = 48;
 		this.ppuy = 48;
@@ -55,9 +57,16 @@ public class GameScreen extends ScreenAdapter {
 		//affichage du vaisseau
 		batch.draw(ship.getTexture(), ship.getPosition().x * ppux, ship.getPosition().y * ppuy, ppux, ppuy);
 
-		//affichage d'un alien
-		batch.draw(alien.getTexture(), alien.getPosition().x * ppux, alien.getPosition().y * ppuy, ppux, ppuy);
-		
+		//affichage des aliens
+		for(Alien alien : aliens){
+			alien.updateAlien(delta);
+			//if(alien.isRemove()){
+			//	w.addRemoveAlien(alien);
+			//}else{
+				batch.draw(alien.getTexture(), alien.getPosition().x * ppux, alien.getPosition().y * ppuy, ppux, ppuy);
+			//}
+		}
+		this.w.addAlien(delta);
 		//affichage des missiles
 		for(Missile bullet : missiles){
 			bullet.updateMissile(delta);
@@ -72,7 +81,6 @@ public class GameScreen extends ScreenAdapter {
 
 		//maj de la position de la fusee
 		ship.update(delta);
-		alien.updateAlien(delta); 
 		
 		this.batch.end();
 

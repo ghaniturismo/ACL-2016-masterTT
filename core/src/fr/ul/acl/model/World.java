@@ -1,24 +1,29 @@
 package fr.ul.acl.model;
 
-import com.badlogic.gdx.math.Vector2;
 import java.util.ArrayList;
 import java.util.Random;
 
+import org.omg.CORBA.PRIVATE_MEMBER;
+
+import com.badlogic.gdx.math.Vector2;
+
 public class World {
 	private Ship space;
-	private Alien alien;
 	private float world_width, world_height;
+	private ArrayList<Alien> aliens;
+	private ArrayList<Alien> removeAlien;
 	private ArrayList<Missile> missiles;
 	private ArrayList<Missile> removeMissiles;
+	private float compteurAddAlien;
 
 	public World() {
 		this.world_width = 30;
 		this.world_height = 30;
-		//alien descend d'une position aléatoire
-		Random r = new Random();
-		int valeur = r.nextInt((int) world_width);
+		
+		this.aliens = new ArrayList<Alien>();
+		
 		this.space = new Ship(new Vector2(15, 0),20, this);
-		this.alien = new Alien(new Vector2(valeur,world_height-1),10, this);
+		
 		this.missiles = new ArrayList<Missile>();
 		this.removeMissiles = new ArrayList<Missile>();
 	}
@@ -29,10 +34,27 @@ public class World {
 	}
 
 	//recuperation d'un alien.
-	public Alien getAlien() {
-		return alien;
+	public ArrayList<Alien> getAliens() {
+		return aliens;
+	}
+	//ajout d'un alien dans la liste
+	public void addAlien(float delta){
+		compteurAddAlien+=delta;
+		if(compteurAddAlien>0.5){
+			//alien descend d'une position aléatoire
+			Random r = new Random();
+			int valeur = r.nextInt((int) world_width);
+			this.aliens.add(new Alien(new Vector2(valeur,world_height-1),10, this));			
+			compteurAddAlien=0;
+		}
+
 	}
 
+	//ajouter dans la liste removeAlien les aliens a supprimer 
+	public void addRemoveAlien(Alien alien){
+		this.removeAlien.add(alien);
+	}
+	
 	//maj du vaisseau
 	public void setSpace(Ship space) {
 		this.space = space;
@@ -58,6 +80,10 @@ public class World {
 		this.world_height = world_height;
 	}
 	
+	public ArrayList<Alien> getRemoveAlien() {
+		return removeAlien;
+	}
+
 	public ArrayList<Missile> getMissiles(){
 		return this.missiles;
 	}
@@ -86,4 +112,5 @@ public class World {
 		this.removeMissiles.clear();
 	}
 
+	
 }
