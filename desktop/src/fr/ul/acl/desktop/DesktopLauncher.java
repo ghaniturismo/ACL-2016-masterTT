@@ -10,4 +10,4 @@ public class DesktopLauncher {
 		new LwjglApplication(new SpaceInvaders(), config);
 	}
 }
-            
+               

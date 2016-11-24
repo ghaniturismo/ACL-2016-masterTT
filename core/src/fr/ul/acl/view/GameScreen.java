@@ -1,7 +1,5 @@
 package fr.ul.acl.view;
 
-import java.util.ArrayList;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
@@ -11,9 +9,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import fr.ul.acl.SpaceInvaders;
 import fr.ul.acl.controller.GameListener;
-import fr.ul.acl.model.Alien;
-import fr.ul.acl.model.Missile;
-import fr.ul.acl.model.Ship;
+import fr.ul.acl.model.GameElement;
 import fr.ul.acl.model.World;
 
 public class GameScreen extends ScreenAdapter {
@@ -22,22 +18,16 @@ public class GameScreen extends ScreenAdapter {
 	private OrthographicCamera camera;
 	private FitViewport viewport;
 	private SpriteBatch batch;
-	private Ship ship;
-	private ArrayList<Alien>  aliens;
-	private ArrayList<Missile>  missiles;
 	private World w;
 	
 	public GameScreen(SpaceInvaders jeux) {
 		batch = new SpriteBatch();
 		this.w = new World();
-		this.ship = w.getSpace();
-		this.aliens = w.getAliens();
-		this.missiles = w.getMissiles();
 		this.ppux = 48;
 		this.ppuy = 48;
-		Gdx.input.setInputProcessor(new GameListener(this.ship));
-		this.world_width = this.w.getWorld_width();
-		this.world_height = this.w.getWorld_height();
+		Gdx.input.setInputProcessor(new GameListener(this.w));
+		this.world_width = World.world_size[0];
+		this.world_height = World.world_size[1];
 		this.camera = new OrthographicCamera();
 		this.viewport = new FitViewport(this.world_width * ppux, this.world_height * ppuy, camera);
 		this.camera.position.set(this.world_width * ppux / 2.0f, this.world_height * ppuy / 2.0f, 0);
@@ -54,44 +44,10 @@ public class GameScreen extends ScreenAdapter {
 		this.camera.update();
 		this.batch.setProjectionMatrix(camera.combined);
 		this.batch.begin();
-		//affichage du vaisseau
-		batch.draw(ship.getTexture(), ship.getPosition().x * ppux, ship.getPosition().y * ppuy, ppux, ppuy);
-
-		//affichage des aliens
-		for(Alien alien : aliens){
-			alien.updateAlien(delta);
-			batch.draw(alien.getTexture(), alien.getPosition().x * ppux, alien.getPosition().y * ppuy, ppux, ppuy);
-			//detection collision ship alien
-			if(ship.hasCollisions(alien)){
-				this.resume();
-				//game.setGameScreen(new GameOverScreen(game));
-			}
-		}
-		this.w.removeAliens(w.getRemoveAlien());
-		this.w.addAlien(delta);
-		
-		//affichage des missiles
-		for(Missile bullet : missiles){
-			bullet.updateMissile(delta);
-			if(bullet.isRemove()){
-				w.addRemoveBullet(bullet);
-			}else{
-				batch.draw(bullet.getTexture(), bullet.getPosition().x * ppux, bullet.getPosition().y * ppuy, ppux, ppuy);
-			}
-			for(Alien alien : aliens){							
-				if(bullet.hasCollisions(alien)){
-					w.addRemoveAlien(alien);
-					w.addRemoveBullet(bullet);
-				}
-			}
-		}
-		w.removeBullet(w.getRemoveMissiles());
-		w.removeRemoveMissiles();
-
-		//maj de la position de la fusee
-		ship.update(delta);
-		
-
+		//affichage des elements 
+		for(GameElement element : w.getGameElements())
+			batch.draw(element.getTexture(), element.getPosition().x * ppux, element.getPosition().y * ppuy, ppux, ppuy);
+		w.update(delta);
 		this.batch.end();
 
 	}

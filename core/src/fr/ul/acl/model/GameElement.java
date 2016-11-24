@@ -4,10 +4,35 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-public abstract class GameElement {
+public abstract class  GameElement {
+	
+	private Rectangle bounds;
 	private Vector2 position;
-	private World world;
 	private float speed;
+	private TypeElement typeElement;
+	private boolean remove;
+	
+	public enum TypeElement {
+        SHIP,
+        MISSILE,
+        ALIEN;
+	}
+	
+	public GameElement(Vector2 position, float speed,TypeElement typeElement) {
+		this.bounds = new Rectangle(position.x, position.y,1,1);
+		this.position = position;
+		this.speed = speed;
+		this.typeElement = typeElement;
+		this.remove = false;
+	}
+	
+	public Vector2 getPosition() {
+		return position;
+	}
+
+	public void setPosition(Vector2 position) {
+		this.position = position;
+	}
 
 	public float getSpeed() {
 		return speed;
@@ -17,33 +42,23 @@ public abstract class GameElement {
 		this.speed = speed;
 	}
 
-	public GameElement(Vector2 position, float s, World w) {
-		this.position = position;
-		this.world = w;
-		this.speed = s;
+	public TypeElement getTypeElement() {
+		return typeElement;
+	}
+	
+	public Rectangle getBB() {
+		return bounds;
+	}
+	
+	public Boolean isRemove() {
+		return this.remove;
 	}
 
-	// recuperer le monde
-	public World getWorld() {
-		return world;
+	public void setRemove() {
+		this.remove = true;
 	}
-
-	public Vector2 getPosition() {
-		return position;
-	}
-
-	public void setPosition(Vector2 position) {
-		this.position = position;
-	}
-
-	 //test la collision
-    public boolean hasCollisions(GameElement ge){
-        Rectangle bbox = ge.getBB();
-        return this.getBB().overlaps(bbox);
-    }
-    
-    public abstract Rectangle getBB();
-    
+	
 	public abstract Texture getTexture();
-
+	public abstract void update(float delta);
+    
 }

@@ -1,4 +1,4 @@
-package fr.ul.acl.view;
+package fr.ul.acl.model;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;

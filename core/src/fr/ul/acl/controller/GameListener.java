@@ -5,36 +5,37 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 
 import fr.ul.acl.model.Ship;
+import fr.ul.acl.model.World;
 
 public class GameListener implements InputProcessor {
-	private Ship ship;
+	private World world;
 
-	public GameListener(Ship ship2) {
-		this.ship = ship2;
+	public GameListener(World world) {
+		this.world = world;
 	}
 
 	// permet de choisir la direction selon les fleches
 	public boolean keyDown(int keycode) {
-		
+		Ship ship = world.getShip();
 		switch (keycode) {
 		case Input.Keys.UP:
-			this.ship.setDirection(3);
+			ship.setDirection(3);
 			ship.stop(true);
 			break;
 		case Input.Keys.DOWN:
-			this.ship.setDirection(4);
+			ship.setDirection(4);
 			ship.stop(true);
 			break;
 		case Input.Keys.LEFT:
-			this.ship.setDirection(1);
+			ship.setDirection(1);
 			ship.stop(true);
 			break;
 		case Input.Keys.RIGHT:
-			this.ship.setDirection(2);
+			ship.setDirection(2);
 			ship.stop(true);
 			break;
 		case Input.Keys.SPACE:
-			this.ship.Shoot();
+			world.shoot();
 			break;
 		case Input.Keys.ESCAPE:
 			Gdx.app.exit();
@@ -47,7 +48,7 @@ public class GameListener implements InputProcessor {
 	@Override
 	public boolean keyUp(int keycode) {
 		if (keycode != Input.Keys.SPACE)
-			ship.stop(false);
+			world.getShip().stop(false);
 		return false;
 	}
 

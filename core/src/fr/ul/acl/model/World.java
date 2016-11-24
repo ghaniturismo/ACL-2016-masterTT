@@ -1,120 +1,106 @@
 package fr.ul.acl.model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
+
 import com.badlogic.gdx.math.Vector2;
 
+import fr.ul.acl.model.GameElement.TypeElement;
+
 public class World {
-	private Ship space;
-	private float world_width, world_height;
-	private ArrayList<Alien> aliens;
-	private ArrayList<Alien> removeAlien;
-	private ArrayList<Missile> missiles;
-	private ArrayList<Missile> removeMissiles;
-	private float compteurAddAlien;
+	public static float world_size[] = {30,30};
+	private ArrayList<GameElement> gameElements;
+	private Ship ship;
+	private float countShowAlien = 0;
 
 	public World() {
-		this.world_width = 30;
-		this.world_height = 30;
-		
-		
-		
-		this.space = new Ship(new Vector2(15, 0),20, this);
-		
-		this.missiles = new ArrayList<Missile>();
-		this.removeMissiles = new ArrayList<Missile>();
-		this.aliens = new ArrayList<Alien>();
-		this.removeAlien = new ArrayList<Alien>();
-	}
-
-	//recuperation du vaisseau
-	public Ship getSpace() {
-		return space;
-	}
-
-	//recuperation d'un alien.
-	public ArrayList<Alien> getAliens() {
-		return aliens;
-	}
-	//ajout d'un alien dans la liste
-	public void addAlien(float delta){
-		compteurAddAlien+=delta;
-		if(compteurAddAlien>0.5){
-			//alien descend d'une position aléatoire
-			Random r = new Random();
-			int valeur = r.nextInt((int) world_width);
-			this.aliens.add(new Alien(new Vector2(valeur,world_height-1),10, this));			
-			compteurAddAlien=0;
-		}
-
-	}
-
-	//ajouter dans la liste removeAlien les aliens a supprimer 
-	public void addRemoveAlien(Alien alien){
-		this.removeAlien.add(alien);
+		gameElements = new ArrayList<GameElement>();
+		this.ship = new Ship(new Vector2(15, 0),20, TypeElement.SHIP);
+		gameElements.add(this.ship);
 	}
 	
-	//supprimr un missile de la liste
-	public void removeAliens(ArrayList<Alien> arrayList){
-		this.aliens.removeAll(this.removeAlien);
+	
+	/************************************************/
+	/********************* WORLD ********************/
+	/************************************************/
+	
+	public ArrayList<GameElement> getGameElements(){
+		return this.gameElements;
+	}
+	
+	public void update(float delta){
+		for(GameElement element : this.gameElements)
+			element.update(delta);
+		countShowAlien+=delta;
+		if(countShowAlien>0.5f){
+			this.addAlien(delta);
+			this.countShowAlien = 0;
+		}
+		this.collisionElement();
+	}
+	
+	private void collisionElement(){
+		//determine s'il y a collision entre 2 elements
+		for(GameElement element : this.gameElements){
+			for(GameElement elementCompare : this.gameElements){
+				// on test s'il y a collision entre 2 elements differents
+				if (element.getBB().overlaps(elementCompare.getBB()) && element.getTypeElement() != elementCompare.getTypeElement()) {
+					if(element.getTypeElement()==TypeElement.SHIP || elementCompare.getTypeElement()==TypeElement.SHIP){
+						System.out.println("GAME OVER ");
+					}else{ // on supprime le misile et l'alien
+						element.setRemove();
+						elementCompare.setRemove();
+					}
+				}
+			}
+		}
+		// supprime les elements 
+		Iterator<GameElement> iterator = this.gameElements.iterator();
+		while (iterator.hasNext()) {
+			GameElement element = iterator.next();
+			if(element.isRemove())
+				iterator.remove();
+		}
+	}
+	
+	/************************************************/
+	/********************* SHIP *********************/
+	/************************************************/
+
+	//recuperation du vaisseau
+	public Ship getShip() {
+		return ship;
 	}
 	
 	//maj du vaisseau
-	public void setSpace(Ship space) {
-		this.space = space;
-	}
-
-	//recup de la largeur du monde
-	public float getWorld_width() {
-		return world_width;
-	}
-
-	//maj de la la largeur du monde
-	public void setWorld_width(float world_width) {
-		this.world_width = world_width;
-	}
-
-	//recup de la hauteur du monde
-	public float getWorld_height() {
-		return world_height;
-	}
-
-	//maj de la hauteur du monde
-	public void setWorld_height(float world_height) {
-		this.world_height = world_height;
+	public void setShip(Ship ship) {
+		this.ship = ship;
 	}
 	
-	public ArrayList<Alien> getRemoveAlien() {
-		return removeAlien;
-	}
-
-	public ArrayList<Missile> getMissiles(){
-		return this.missiles;
-	}
+	//collision avec le vaisseau
+	
+	
+	/************************************************/
+	/******************* MISSILE ********************/
+	/************************************************/
 	
 	//ajouter un missile dans la liste
-	public void addBullet(){
-		this.missiles.add(new Missile(new Vector2(space.getPosition().x, space.getPosition().y+0.5f),30, this));
+	public void shoot(){
+		this.gameElements.add(new Missile(new Vector2(ship.getPosition().x, ship.getPosition().y+1),30, TypeElement.MISSILE));
 	}
 	
-	//ajouter dans la liste removeMissiles les missiles a supprimer 
-	public void addRemoveBullet(Missile missile){
-		this.removeMissiles.add(missile);
-	}
 	
-	//supprimr un missile de la liste
-	public void removeBullet(ArrayList<Missile> arrayList){
-		this.missiles.removeAll(this.removeMissiles);
-	}
-
-	public ArrayList<Missile> getRemoveMissiles() {
-		return removeMissiles;
-	}
+	/************************************************/
+	/******************** ALIEN *********************/
+	/************************************************/
 	
-	//supprime tous les elements present dans la liste removeMissile
-	public void removeRemoveMissiles() {
-		this.removeMissiles.clear();
+	//ajout d'un alien en fonction du temps 
+	private void addAlien(float delta){
+		//alien descend d'une position aléatoire
+		Random r = new Random();
+		int valeur = r.nextInt((int) world_size[0]);
+		this.gameElements.add(new Alien(new Vector2(valeur,world_size[1]-1),10, TypeElement.ALIEN));			
 	}
-
 	
 }
