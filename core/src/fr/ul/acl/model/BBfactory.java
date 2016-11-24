@@ -1,4 +1,4 @@
-package fr.ul.acl.view;
+package fr.ul.acl.model;
 
 import com.badlogic.gdx.math.Rectangle;
 

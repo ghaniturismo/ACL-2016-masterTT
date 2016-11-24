@@ -4,9 +4,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-import fr.ul.acl.view.BBfactory;
-import fr.ul.acl.view.TextureFactory;
-
 /**
  * Created by ghaniturismo on 20/11/16.
  */

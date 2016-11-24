@@ -4,9 +4,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-import fr.ul.acl.view.BBfactory;
-import fr.ul.acl.view.TextureFactory;
-
 public class Missile extends GameElement {
 
 	private boolean remove = false;
