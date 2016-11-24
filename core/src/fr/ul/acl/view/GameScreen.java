@@ -60,21 +60,20 @@ public class GameScreen extends ScreenAdapter {
 		//affichage des aliens
 		for(Alien alien : aliens){
 			alien.updateAlien(delta);
-			//if(alien.isRemove()){
-			//	w.addRemoveAlien(alien);
-			//}else{
 			batch.draw(alien.getTexture(), alien.getPosition().x * ppux, alien.getPosition().y * ppuy, ppux, ppuy);
-			
 			for(Missile missile : missiles){							
 				if(alien.hasCollisions(missile))
-				System.out.println("Colison bullet alien");
+					w.addRemoveAlien(alien);
 			}
-				//detection collision ship alien
-				if(ship.hasCollisions(alien))
-					System.out.println("Collison ship - alien");			
-				//}
+			//detection collision ship alien
+			if(ship.hasCollisions(alien))
+				System.out.println("GAME OVER");
+				
+							
 		}
+		this.w.removeAliens(w.getRemoveAlien());
 		this.w.addAlien(delta);
+		
 		//affichage des missiles
 		for(Missile bullet : missiles){
 			bullet.updateMissile(delta);

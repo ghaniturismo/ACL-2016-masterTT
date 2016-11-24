@@ -17,12 +17,14 @@ public class World {
 		this.world_width = 30;
 		this.world_height = 30;
 		
-		this.aliens = new ArrayList<Alien>();
+		
 		
 		this.space = new Ship(new Vector2(15, 0),20, this);
 		
 		this.missiles = new ArrayList<Missile>();
 		this.removeMissiles = new ArrayList<Missile>();
+		this.aliens = new ArrayList<Alien>();
+		this.removeAlien = new ArrayList<Alien>();
 	}
 
 	//recuperation du vaisseau
@@ -50,6 +52,11 @@ public class World {
 	//ajouter dans la liste removeAlien les aliens a supprimer 
 	public void addRemoveAlien(Alien alien){
 		this.removeAlien.add(alien);
+	}
+	
+	//supprimr un missile de la liste
+	public void removeAliens(ArrayList<Alien> arrayList){
+		this.aliens.removeAll(this.removeAlien);
 	}
 	
 	//maj du vaisseau
