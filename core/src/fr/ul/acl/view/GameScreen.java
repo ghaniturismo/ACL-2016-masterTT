@@ -61,15 +61,11 @@ public class GameScreen extends ScreenAdapter {
 		for(Alien alien : aliens){
 			alien.updateAlien(delta);
 			batch.draw(alien.getTexture(), alien.getPosition().x * ppux, alien.getPosition().y * ppuy, ppux, ppuy);
-			for(Missile missile : missiles){							
-				if(alien.hasCollisions(missile))
-					w.addRemoveAlien(alien);
-			}
 			//detection collision ship alien
-			if(ship.hasCollisions(alien))
-				System.out.println("GAME OVER");
-				
-							
+			if(ship.hasCollisions(alien)){
+				this.resume();
+				//game.setGameScreen(new GameOverScreen(game));
+			}
 		}
 		this.w.removeAliens(w.getRemoveAlien());
 		this.w.addAlien(delta);
@@ -81,6 +77,12 @@ public class GameScreen extends ScreenAdapter {
 				w.addRemoveBullet(bullet);
 			}else{
 				batch.draw(bullet.getTexture(), bullet.getPosition().x * ppux, bullet.getPosition().y * ppuy, ppux, ppuy);
+			}
+			for(Alien alien : aliens){							
+				if(bullet.hasCollisions(alien)){
+					w.addRemoveAlien(alien);
+					w.addRemoveBullet(bullet);
+				}
 			}
 		}
 		w.removeBullet(w.getRemoveMissiles());
