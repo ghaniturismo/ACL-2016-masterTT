@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
+import fr.ul.acl.controller.GameListener;
 import fr.ul.acl.model.GameElement.TypeElement;
 
 public class World {
@@ -15,6 +17,7 @@ public class World {
 	private float countShowAlien = 0;
 
 	public World() {
+		Gdx.input.setInputProcessor(new GameListener(this));
 		gameElements = new ArrayList<GameElement>();
 		this.ship = new Ship(new Vector2(15, 0),20, TypeElement.SHIP);
 		gameElements.add(this.ship);
