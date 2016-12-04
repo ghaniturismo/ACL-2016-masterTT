@@ -14,10 +14,11 @@
 
 # Sprint
 - Les fonctionalités du Sprint 1  [V1.0]:
-    - Déplacement du vaisseau en cosole.
+    - Déplacement du vaisseau en console.
     - Affichage de la position du vaisseau sur console.
 
 - Les fonctionalités du Sprint 2  [V1.1]:
+    - Affichage des elements du jeu.
     - Déplacement du vaisseau en graphique.
     - Le vaisseau peut tirer.
     - Un Alien déscend verticalement vers le vaisseau.
@@ -25,3 +26,5 @@
 - Les fonctionalités du Sprint 3  [V2.0]:
     - Plusieur aliens qui descende.
     - Detection de collision entre vaisseau et Aliens.
+    
+- Les fonctionalités du Sprint 4  [V2.1]:
