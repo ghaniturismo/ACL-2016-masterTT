@@ -24,7 +24,10 @@
     - Un Alien déscend verticalement vers le vaisseau.
 
 - Les fonctionalités du Sprint 3  [V2.0]:
+    - Les tires disparaissent lorsqu'il sorte d'ecran du jeu et lorsqu'il touche un alien. 
     - Plusieur aliens qui descende.
     - Detection de collision entre vaisseau et Aliens.
+    - Alien disparait lorsqu'il est touché par un tire.
     
 - Les fonctionalités du Sprint 4  [V2.1]:
+    - Score augmente lorsqu'on touche un alien par un tire.
