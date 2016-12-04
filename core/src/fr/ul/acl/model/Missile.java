@@ -10,7 +10,7 @@ public class Missile extends GameElement {
 	}
 	
 	@Override
-	// recupere la texture d'un vaisseau
+	// recupere la texture d'un missile.
 	public Texture getTexture() {
 		return TextureFactory.getInstance().getTextureBullet();
 	}

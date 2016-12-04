@@ -15,14 +15,14 @@ public class World {
 	private ArrayList<GameElement> gameElements;
 	private Ship ship;
 	private float countShowAlien = 0;
+	private static short score;
 
 	public World() {
 		Gdx.input.setInputProcessor(new GameListener(this));
 		gameElements = new ArrayList<GameElement>();
 		this.ship = new Ship(new Vector2(15, 0),20, TypeElement.SHIP);
-		gameElements.add(this.ship);
+		gameElements.add(this.ship);		
 	}
-	
 	
 	/************************************************/
 	/********************* WORLD ********************/
@@ -51,9 +51,13 @@ public class World {
 				if (element.getBB().overlaps(elementCompare.getBB()) && element.getTypeElement() != elementCompare.getTypeElement()) {
 					if(element.getTypeElement()==TypeElement.SHIP || elementCompare.getTypeElement()==TypeElement.SHIP){
 						System.out.println("GAME OVER ");
-					}else{ // on supprime le misile et l'alien
+					}else{
+						this.addScore();
+						// on supprime le misile et l'alien
 						element.setRemove();
 						elementCompare.setRemove();
+						//score affiche console
+						System.out.println("score = "+score);
 					}
 				}
 			}
@@ -105,5 +109,13 @@ public class World {
 		int valeur = r.nextInt((int) world_size[0]);
 		this.gameElements.add(new Alien(new Vector2(valeur,world_size[1]-1),10, TypeElement.ALIEN));			
 	}
+	
+	/************************************************/
+	/******************** SCORE *********************/
+	/************************************************/
+	
+	public void addScore(){
+        World.score+=1;
+    }
 	
 }

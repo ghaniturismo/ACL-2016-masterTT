@@ -13,7 +13,7 @@ public class Alien extends GameElement {
 	}
 	
 	@Override
-	// recupere la texture d'un vaisseau
+	// recupere la texture d'un alien.
 	public Texture getTexture() {
 		return TextureFactory.getInstance().getTextureAlien();
 	}

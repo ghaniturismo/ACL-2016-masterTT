@@ -14,12 +14,12 @@ public class Ship extends GameElement {
 	}
 	
 	@Override
-	// recupere la texture d'un vaisseau
+	// recupere la texture d'un vaisseau.
 	public Texture getTexture() {
 		return TextureFactory.getInstance().getTextureShip();
 	}
 	
-	// maj de la position des elements dans la fenetre
+	// MAJ de la position des elements dans la fenetre.
 	public void update(float delta) {
 		float tmp = delta * this.getSpeed();
 		if (isMoving) {
