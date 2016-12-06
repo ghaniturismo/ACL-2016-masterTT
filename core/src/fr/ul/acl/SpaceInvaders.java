@@ -1,13 +1,16 @@
 package fr.ul.acl;
 
 import com.badlogic.gdx.Game;
+
+import fr.ul.acl.view.EndScreen;
 import fr.ul.acl.view.GameScreen;
 import fr.ul.acl.view.SplashScreen;
 
 public class SpaceInvaders extends Game {
 
-	SplashScreen splashScreen;
-	GameScreen gameScreen;
+	private SplashScreen splashScreen;
+	private GameScreen gameScreen;
+	private EndScreen endScreen;
 
 	// creation de la fenetre de depart et de jeux
 	@Override
@@ -26,5 +29,10 @@ public class SpaceInvaders extends Game {
 	public void setSplashScreen() {
 		setScreen(splashScreen);
 	}
+	
+	// permet de passer a la fenetre de fin
+	public void setEndScreen(int score){
+		this.endScreen = new EndScreen(score);
+		setScreen(endScreen);	}
 
 }
