@@ -125,9 +125,9 @@ public class ShipTest {
 		assertTrue(tmp_h - 1 == ship.getPosition().y);
 	}
 
-	// Test si on est mort
+	// on verifie si y'a bien la détection de la collision entre l'alien et la fusee 
 		@Test
-		public void dead() {
+		public void AlienCollisonShip() {
 			World w = new World();
 			Ship ship = w.getShip();
 			Alien a = new Alien(ship.getPosition(),10, TypeElement.ALIEN);

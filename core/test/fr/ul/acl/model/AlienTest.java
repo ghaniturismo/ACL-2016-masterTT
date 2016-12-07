@@ -8,60 +8,42 @@ import org.junit.Test;
 
 import com.badlogic.gdx.math.Vector2;
 
+import fr.ul.acl.model.GameElement.TypeElement;
+
 public class AlienTest {
 	private float speed;
-	private Ship ship;
-	private ArrayList<Alien>  aliens;
-	private ArrayList<Missile>  missiles;
-	private World w;
-	private boolean res;
+	private float delta = (float) 0.017519908;
 
 
 	@Test
+	//on verifie si le déplacement vers le bas se fait correctement
 	public void AlienGoDown() {
-		/*World world = new World();
-		Alien alien = world.getAliens();
-		speed = alien.getSpeed();
+		World world = new World();
+		Alien a = new Alien(new Vector2(0,world.world_size[1]-1),10, TypeElement.ALIEN);
+		ArrayList<GameElement> gameElements = new ArrayList<GameElement>();
+		gameElements.add(a);
+		world.setGameElements(gameElements);
+		speed = a.getSpeed();
 		float tmp = speed * delta;
-		float tmp1 = alien.getPosition().y - tmp;
-		alien.updateAlien(delta);
-		float y = alien.getPosition().y;
-		assertTrue( tmp1 == y );*/
+		float tmp1 = a.getPosition().y - tmp;
+		a.update(delta);
+		float y = a.getPosition().y;
+		assertTrue( tmp1 == y );
 	}
 	
-/*	@Test
-public void AlienCollisonShip() {
-		this.w = new World();
-		this.ship = w.getSpace();
-		this.w.addAlien(0.6f);
-		
-		this.aliens = w.getAliens();
-		for(Alien alien : aliens){
-			Vector2 tmp =  ship.getPosition();
-			alien.setPosition(tmp);		
-			this.res = ship.hasCollisions(alien);
-
-		}
-		assertFalse(res);
-	}
-
 	@Test
+	// on verifie si y'a bien la détection de la collision entre l'alien et bullet et la maj du score
 	public void AlienCollisonBullet() {
-		this.w = new World();
-		this.ship = w.getSpace();
-		this.missiles = w.getMissiles();
-		this.w.addAlien(0.6f);
-		this.w.addBullet();
-		
-		this.aliens = w.getAliens();
-		for(Alien alien : aliens){
-			for(Missile missile : missiles){
-			Vector2 tmp =  missile.getPosition();
-			alien.setPosition(tmp);		
-			this.res = missile.hasCollisions(alien);
-			
-		}
-		assertFalse(res);
+		World world = new World();
+		Alien a = new Alien(new Vector2(0,world.world_size[1]-1),10, TypeElement.ALIEN);
+		Missile m = new Missile(new Vector2(0,world.world_size[1]-1), 30, TypeElement.MISSILE);
+		ArrayList<GameElement> gameElements = new ArrayList<GameElement>();
+		gameElements.add(a);
+		gameElements.add(m);
+		world.setGameElements(gameElements);
+		int tmp = world.getScore();
+		world.update(delta);
+		assertTrue(world.getScore() == tmp+100);
 	}
-	}*/
+	
 }
