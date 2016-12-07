@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import fr.ul.acl.SpaceInvaders;
+import fr.ul.acl.controller.GameListener;
 import fr.ul.acl.model.GameElement;
 import fr.ul.acl.model.World;
 
@@ -27,6 +28,7 @@ public class GameScreen extends ScreenAdapter {
 		this.mygame = jeux;
 		batch = new SpriteBatch();
 		this.w = new World();
+		Gdx.input.setInputProcessor(new GameListener(w));
 		this.ppux = 48;
 		this.ppuy = 48;
 		this.world_width = World.world_size[0];

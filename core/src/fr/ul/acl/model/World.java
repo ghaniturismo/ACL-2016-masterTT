@@ -3,11 +3,7 @@ package fr.ul.acl.model;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
-
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
-
-import fr.ul.acl.controller.GameListener;
 import fr.ul.acl.model.GameElement.TypeElement;
 
 public class World {
@@ -18,8 +14,8 @@ public class World {
 	private int score = 0;
 	private boolean gameover = false;
 
+
 	public World() {
-		Gdx.input.setInputProcessor(new GameListener(this));
 		gameElements = new ArrayList<GameElement>();
 		this.ship = new Ship(new Vector2(15, 0), 20, TypeElement.SHIP);
 		gameElements.add(this.ship);
@@ -31,6 +27,10 @@ public class World {
 
 	public ArrayList<GameElement> getGameElements() {
 		return this.gameElements;
+	}
+	
+	public void setGameElements(ArrayList<GameElement> gameElements) {
+		this.gameElements = gameElements;
 	}
 
 	public void update(float delta) {

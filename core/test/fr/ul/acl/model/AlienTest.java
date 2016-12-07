@@ -29,8 +29,8 @@ public class AlienTest {
 		assertTrue( tmp1 == y );*/
 	}
 	
-	@Test
-	public void AlienCollisonShip() {
+/*	@Test
+public void AlienCollisonShip() {
 		this.w = new World();
 		this.ship = w.getSpace();
 		this.w.addAlien(0.6f);
@@ -63,5 +63,5 @@ public class AlienTest {
 		}
 		assertFalse(res);
 	}
-	}
+	}*/
 }
