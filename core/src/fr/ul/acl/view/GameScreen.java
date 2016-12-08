@@ -66,8 +66,8 @@ public class GameScreen extends ScreenAdapter {
 		this.batch.setProjectionMatrix(camera.combined);
 		this.batch.begin();
 		//lance de music
-        music.setLooping(true);
-        music.play();
+        //music.setLooping(true);
+        //music.play();
 		//image du fond.
 		this.batch.draw(img, 0, 0);
 		// affichage des elements

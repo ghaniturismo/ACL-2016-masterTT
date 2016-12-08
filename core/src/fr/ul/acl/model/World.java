@@ -3,6 +3,9 @@ package fr.ul.acl.model;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.Vector2;
 
 import fr.ul.acl.model.GameElement.TypeElement;
@@ -19,6 +22,7 @@ public class World {
 	private int level = 1;
 	private float alienspeed = 10;
 	private float bonusspeed = 10;
+	private Music music;
 
 
 	public World() {
@@ -26,6 +30,7 @@ public class World {
 		this.ship = new Ship(new Vector2(world_size[1] / 2, 0), 20,
 				TypeElement.SHIP);
 		gameElements.add(this.ship);
+		this.music=Gdx.audio.newMusic(Gdx.files.internal("sounds/tir_tir_generic.mp3"));
 	}
 
 	/************************************************/
@@ -166,6 +171,8 @@ public class World {
 	public void shoot() {
 		this.gameElements.add(new Missile(new Vector2(ship.getPosition().x,
 				ship.getPosition().y + 1), 30, TypeElement.MISSILE));
+		 music.setLooping(false);
+	     music.play();
 	}
 
 	/************************************************/
