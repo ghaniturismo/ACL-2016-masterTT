@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
+import fr.ul.acl.SpaceInvaders;
+
 public class EndScreen extends ScreenAdapter {
 	private SpriteBatch batch;
 	private Texture img;
@@ -18,7 +20,7 @@ public class EndScreen extends ScreenAdapter {
 	private BitmapFont font;
 
 	// creation de la premiere page
-	public EndScreen(int score) {
+	public EndScreen(SpaceInvaders jeux,int score) {
 		this.batch = new SpriteBatch();
 		this.score = score;
 		this.font = new BitmapFont();
