@@ -2,8 +2,10 @@ package fr.ul.acl.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -23,19 +25,21 @@ public class GameScreen extends ScreenAdapter {
 	private SpaceInvaders mygame;
 	private BitmapFont font;
 	protected String score,level;
+	private Texture img;
+	private Music music;
 
 	public GameScreen(SpaceInvaders jeux) {
 		this.mygame = jeux;
+		this.music=Gdx.audio.newMusic(Gdx.files.internal("sounds/tir_tir_generic.mp3"));
 		batch = new SpriteBatch();
 		this.w = new World();
+		this.img = new Texture("images/background_star.jpg");
 		Gdx.input.setInputProcessor(new GameListener(w));
 		this.ppux = 48;
 		this.ppuy = 48;
 		this.world_width = World.world_size[0];
 		this.world_height = World.world_size[1];
-		this.camera = new 
-				
-OrthographicCamera();
+		this.camera = new OrthographicCamera();
 		this.font = new BitmapFont();
 		this.score = "Score :";
 		this.level = "Level :";
@@ -45,6 +49,8 @@ OrthographicCamera();
 		this.camera.position.set(this.world_width * ppux / 2.0f,
 				this.world_height * ppuy / 2.0f, 0);
 		this.camera.update();
+		
+		
 	}
 
 	public void resize(int width, int height) {
@@ -57,6 +63,11 @@ OrthographicCamera();
 		this.camera.update();
 		this.batch.setProjectionMatrix(camera.combined);
 		this.batch.begin();
+		//lance de music
+        music.setLooping(true);
+        music.play();
+		//image du fond.
+		this.batch.draw(img, 0, 0);
 		// affichage des elements
 		for (GameElement element : w.getGameElements())
 			batch.draw(element.getTexture(), element.getPosition().x * ppux,
