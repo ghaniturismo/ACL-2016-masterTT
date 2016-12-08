@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 import com.badlogic.gdx.math.Vector2;
-import com.sun.org.apache.xpath.internal.SourceTree;
 
 import fr.ul.acl.model.GameElement.TypeElement;
 
@@ -16,7 +15,6 @@ public class World {
 	private int score = 0;
 	private boolean gameover = false;
 	private int vie = 6;
-
 	private int level = 1;
 	private float alienspeed = 10;
 
@@ -104,6 +102,11 @@ public class World {
 			gameElements.add(this.ship);
 			this.level = leveltmp;
 		}
+	}
+	
+
+	public int getVie() {
+		return vie/2;
 	}
 
 	/************************************************/
