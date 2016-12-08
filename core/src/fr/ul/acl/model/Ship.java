@@ -51,7 +51,9 @@ public class Ship extends GameElement {
 		this.direction = direction;
 	}
 	
-	// permet le mvt selon la direction
+/*
+ * se deplacer a gauche
+ */
 	public void turnLeft(float tmp) {
 		if (this.getPosition().x - tmp <= 0) {
 			isMoving = false;
@@ -60,7 +62,10 @@ public class Ship extends GameElement {
 			this.getPosition().x -= tmp;
 		}
 	}
-
+/*
+ * se deplacer a droite
+ */
+	
 	public void turnRight(float tmp) {
 		if (this.getPosition().x + 1 + tmp >= World.world_size[0]) {
 			isMoving = false;
@@ -69,7 +74,10 @@ public class Ship extends GameElement {
 			this.getPosition().x += tmp;
 		}
 	}
-
+	
+/*
+ * se deplacer en haut
+ */
 	public void turnUp(float tmp) {
 		if (this.getPosition().y + 1 + tmp >= World.world_size[1]) {
 			isMoving = false;
@@ -78,7 +86,10 @@ public class Ship extends GameElement {
 			this.getPosition().y += tmp;
 		}
 	}
-
+	
+/*
+ * se deplacer en bas
+ */
 	public void turnDown(float tmp) {
 		if (this.getPosition().y - tmp <= 0) {
 			isMoving = false;

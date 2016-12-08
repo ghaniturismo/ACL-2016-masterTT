@@ -49,8 +49,7 @@ public class GameScreen extends ScreenAdapter {
 	}
 
 	public void render(float delta) {
-		Gdx.gl20.glViewport(0, 0, Gdx.graphics.getWidth(),
-				Gdx.graphics.getHeight());
+		Gdx.gl20.glViewport(0, 0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		this.camera.update();
 		this.batch.setProjectionMatrix(camera.combined);
@@ -61,8 +60,7 @@ public class GameScreen extends ScreenAdapter {
 					element.getPosition().y * ppuy, ppux, ppuy);
 		// affichage du score et nbre de vie
 		this.font.getData().setScale(3, 3);
-		this.font.draw(batch, score + this.w.getScore(), 2, this.world_height
-				* ppuy);
+		this.font.draw(batch, score + this.w.getScore(), 2, this.world_height* ppuy);
 		w.update(delta);
 		this.batch.end();
 

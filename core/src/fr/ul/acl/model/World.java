@@ -50,22 +50,20 @@ public class World {
 			for (GameElement elementCompare : this.gameElements) {
 				// on test s'il y a collision entre 2 elements differents
 				if (element.getBB().overlaps(elementCompare.getBB())
-						&& element.getTypeElement() != elementCompare
-								.getTypeElement()) {
+					&& element.getTypeElement() != elementCompare.getTypeElement()) {
 					if (element.getTypeElement() == TypeElement.SHIP
-							|| elementCompare.getTypeElement() == TypeElement.SHIP) {
+						|| elementCompare.getTypeElement() == TypeElement.SHIP) {
 						this.gameover = true;
 					} else {
 						// on supprime le misile et l'alien
 						element.setRemove();
 						elementCompare.setRemove();
-						// score affiche console
 						this.addScore();
 					}
 				}
 			}
 		}
-		// supprime les elements
+		// supprime les elements du jeu
 		Iterator<GameElement> iterator = this.gameElements.iterator();
 		while (iterator.hasNext()) {
 			GameElement element = iterator.next();
@@ -74,6 +72,7 @@ public class World {
 		}
 	}
 
+	// fonction qui renvoie l'etat du jeu
 	public boolean isGameover() {
 		return gameover;
 	}
@@ -91,8 +90,6 @@ public class World {
 	public void setShip(Ship ship) {
 		this.ship = ship;
 	}
-
-	// collision avec le vaisseau
 
 	/************************************************/
 	/******************* MISSILE ********************/
@@ -113,8 +110,7 @@ public class World {
 		// alien descend d'une position aléatoire
 		Random r = new Random();
 		int valeur = r.nextInt((int) world_size[0]);
-		this.gameElements.add(new Alien(new Vector2(valeur, world_size[1] - 1),
-				10, TypeElement.ALIEN));
+		this.gameElements.add(new Alien(new Vector2(valeur, world_size[1] - 1),10, TypeElement.ALIEN));
 	}
 
 	/************************************************/
@@ -125,6 +121,7 @@ public class World {
 		this.score += 50;
 	}
 
+	//renvoie le score du jeu.
 	public int getScore() {
 		return this.score;
 	}

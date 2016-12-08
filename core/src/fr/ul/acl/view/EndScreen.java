@@ -43,6 +43,9 @@ public class EndScreen extends ScreenAdapter {
 	        this.font.getData().setScale(2,2);
 	        //on affiche le score
 	        this.font.draw(batch,"Vous avez obtenu " + this.score + " points", 100, img.getHeight());
+	        //this.font.draw(batch,"Vous avez obtenu " + this.score + " points"+"\nClic sur R pour rejouer !", 100, img.getHeight());
+	        
+	        
 	        this.batch.end();
 	}
 

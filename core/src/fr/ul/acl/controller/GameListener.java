@@ -9,6 +9,7 @@ import fr.ul.acl.model.World;
 
 public class GameListener implements InputProcessor {
 	private World world;
+	//private SpaceInvaders mygame;
 
 	public GameListener(World world) {
 		this.world = world;
@@ -34,6 +35,16 @@ public class GameListener implements InputProcessor {
 			ship.setDirection(2);
 			ship.stop(true);
 			break;
+		
+		//pour rejouer
+		
+		
+		/*case Input.Keys.R:
+			if(this.world.isGameover()){
+				this.mygame.setGameScreen();
+			}
+			break;
+		*/
 		case Input.Keys.SPACE:
 			world.shoot();
 			break;
