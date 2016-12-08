@@ -69,7 +69,6 @@ public class GameScreen extends ScreenAdapter {
         //music.setLooping(true);
         //music.play();
 		//image du fond.
-		this.batch.draw(img, 0, 0);
 		// affichage des elements
 		for (GameElement element : w.getGameElements())
 			batch.draw(element.getTexture(), element.getPosition().x * ppux,
