@@ -30,4 +30,7 @@
     - Alien disparait lorsqu'il est touché par un tire.
     
 - Les fonctionalités du Sprint 4  [V2.1]:
+    - [FIX] en MVC.
     - Score augmente lorsqu'on touche un alien par un tire.
+    - L'affichage du score sur l'ecran du jeu.
+    - GAME OVER et affichage du score a la fin du jeu lorsque le ship est mort.
