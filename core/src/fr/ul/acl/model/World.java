@@ -12,15 +12,19 @@ public class World {
 	private ArrayList<GameElement> gameElements;
 	private Ship ship;
 	private float countShowAlien = 0;
+	private float countShowBonus = 0;
 	private int score = 0;
 	private boolean gameover = false;
 	private int vie = 6;
 	private int level = 1;
 	private float alienspeed = 10;
+	private float bonusspeed = 10;
+
 
 	public World() {
 		gameElements = new ArrayList<GameElement>();
-		this.ship = new Ship(new Vector2(world_size[1]/2, 0), 20, TypeElement.SHIP);
+		this.ship = new Ship(new Vector2(world_size[1] / 2, 0), 20,
+				TypeElement.SHIP);
 		gameElements.add(this.ship);
 	}
 
@@ -44,8 +48,21 @@ public class World {
 			this.addAlien(delta);
 			this.countShowAlien = 0;
 		}
+		countShowBonus += delta;
+		if (countShowBonus > 10f) {
+			this.addBonus(delta);
+			this.countShowBonus = 0;
+		}
 		this.collisionElement();
 		level();
+	}
+
+	private void addBonus(float delta) {
+		Random r = new Random();
+		int valeur = r.nextInt((int) world_size[0]);
+		this.gameElements.add(new Bonus(new Vector2(valeur, world_size[1] - 1),
+				this.bonusspeed, TypeElement.BONUS));
+
 	}
 
 	private void collisionElement() {
@@ -57,18 +74,36 @@ public class World {
 						&& element.getTypeElement() != elementCompare
 								.getTypeElement()) {
 					if (element.getTypeElement() == TypeElement.SHIP
-						|| elementCompare.getTypeElement() == TypeElement.SHIP) {
-						this.vie = vie-1;
-						this.isDead();
-						gameElements = new ArrayList<GameElement>();
-						this.ship.setPosition(new Vector2(world_size[1]/2,0));
-						gameElements.add(this.ship);
-
+							|| elementCompare.getTypeElement() == TypeElement.SHIP) {
+						if (elementCompare.getTypeElement() != TypeElement.BONUS
+								&& element.getTypeElement() != TypeElement.BONUS) {
+							this.vie = vie - 1;
+							this.isDead();
+							gameElements = new ArrayList<GameElement>();
+							this.ship.setPosition(new Vector2(
+									world_size[1] / 2, 0));
+							gameElements.add(this.ship);
+						} else {
+							this.addScore();
+							this.vie += 1;
+							if (elementCompare.getTypeElement() == TypeElement.BONUS)
+								elementCompare.setRemove();
+							else
+								element.setRemove();
+						}
 					} else {
-						// on supprime le misile et l'alien
-						element.setRemove();
-						elementCompare.setRemove();
-						this.addScore();
+						if (elementCompare.getTypeElement() != TypeElement.BONUS
+								&& element.getTypeElement() != TypeElement.BONUS) {
+							// on supprime le misile et l'alien
+							element.setRemove();
+							elementCompare.setRemove();
+							this.addScore();
+						} else {
+							this.addScore();
+							this.vie += 1;
+							element.setRemove();
+							elementCompare.setRemove();
+						}
 					}
 				}
 			}
@@ -85,7 +120,7 @@ public class World {
 	// fonction qui renvoie l'etat du jeu
 	public boolean isGameover() {
 		return gameover;
-		
+
 	}
 
 	public int getLevel() {
@@ -95,18 +130,18 @@ public class World {
 	public void level() {
 		int tmp = score / 1000;
 		int leveltmp = tmp + 1;
-		if(this.level<leveltmp){
-			this.alienspeed += 5;
+		if (this.level < leveltmp) {
+			this.alienspeed += 2;
+			this.bonusspeed += 2;
 			gameElements = new ArrayList<GameElement>();
-			this.ship.setPosition(new Vector2(world_size[1]/2,0));
+			this.ship.setPosition(new Vector2(world_size[1] / 2, 0));
 			gameElements.add(this.ship);
 			this.level = leveltmp;
 		}
 	}
-	
 
 	public int getVie() {
-		return vie/2;
+		return vie / 2;
 	}
 
 	/************************************************/
@@ -159,11 +194,11 @@ public class World {
 		return this.score;
 	}
 
-	//decremente la vie lorsque le vaisseau est mort.
-	public void isDead(){
-		if(vie==0){
-			this.gameover=true;
+	// decremente la vie lorsque le vaisseau est mort.
+	public void isDead() {
+		if (vie == 0) {
+			this.gameover = true;
 		}
 	}
-	
+
 }

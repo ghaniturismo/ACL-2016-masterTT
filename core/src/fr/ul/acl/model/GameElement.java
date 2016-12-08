@@ -15,7 +15,8 @@ public abstract class  GameElement {
 	public enum TypeElement {
         SHIP,
         MISSILE,
-        ALIEN;
+        ALIEN,
+        BONUS;
 	}
 	
 	public GameElement(Vector2 position, float speed,TypeElement typeElement) {
