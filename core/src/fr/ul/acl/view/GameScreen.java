@@ -25,7 +25,7 @@ public class GameScreen extends ScreenAdapter {
 	private SpaceInvaders mygame;
 	private BitmapFont font;
 	protected String score,level,vie;;
-	private Texture img;
+	private Texture img, img2;
 	private Music music;
 
 
@@ -35,6 +35,7 @@ public class GameScreen extends ScreenAdapter {
 		batch = new SpriteBatch();
 		this.w = new World();
 		this.img = new Texture("images/background_star.jpg");
+		this.img2 = new Texture("images/pause.png");
 		Gdx.input.setInputProcessor(new GameListener(w));
 		this.ppux = 48;
 		this.ppuy = 48;
@@ -65,23 +66,31 @@ public class GameScreen extends ScreenAdapter {
 		this.camera.update();
 		this.batch.setProjectionMatrix(camera.combined);
 		this.batch.begin();
-		//lance de music
-        //music.setLooping(true);
-        //music.play();
-		//image du fond.
-		// affichage des elements
-		for (GameElement element : w.getGameElements())
-			batch.draw(element.getTexture(), element.getPosition().x * ppux,
-					element.getPosition().y * ppuy, ppux, ppuy);
 		// affichage du score et nbre de vie
 		this.font.getData().setScale(3, 3);
 		this.font.draw(batch, score + this.w.getScore(), 2, this.world_height* ppuy);
 		this.font.draw(batch, level + this.w.getLevel(), (this.world_width-4)*ppux, this.world_height* ppuy);
 		this.font.draw(batch, vie + this.w.getVie(), (this.world_width-4)*ppux, (this.world_height-1)* ppuy);
+		
+		//lance de music
+        //music.setLooping(true);
+        //music.play();
+		
+		if (!w.isPaused()) {
+		//image du fond.
+		// affichage des elements
+		for (GameElement element : w.getGameElements())
+			batch.draw(element.getTexture(), element.getPosition().x * ppux,
+					element.getPosition().y * ppuy, ppux, ppuy);
+
 
 		w.update(delta);
+		}
+		else {
+			this.batch.draw(img2, 0, 0);
+		}
 		this.batch.end();
-
+		
 		if (w.isGameover()) {
 			batch.dispose();
 			this.mygame.setEndScreen(w.getScore());
