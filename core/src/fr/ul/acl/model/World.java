@@ -86,7 +86,6 @@ public class World {
 
 	// fonction qui renvoie l'etat du jeu
 	public boolean isGameover() {
-		
 		return gameover;
 		
 	}
@@ -100,6 +99,9 @@ public class World {
 		int leveltmp = tmp + 1;
 		if(this.level<leveltmp){
 			this.alienspeed += 5;
+			gameElements = new ArrayList<GameElement>();
+			this.ship.setPosition(new Vector2(world_size[1]/2,0));
+			gameElements.add(this.ship);
 			this.level = leveltmp;
 		}
 	}
