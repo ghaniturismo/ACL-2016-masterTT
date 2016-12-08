@@ -170,10 +170,11 @@ public class World {
 
 	// ajouter un missile dans la liste
 	public void shoot() {
-		this.gameElements.add(new Missile(new Vector2(ship.getPosition().x,
-				ship.getPosition().y + 1), 30, TypeElement.MISSILE));
-		 music.setLooping(false);
-	     music.play();
+		if(this.paused==false){
+			this.gameElements.add(new Missile(new Vector2(ship.getPosition().x, ship.getPosition().y + 1), 30, TypeElement.MISSILE));
+			music.setLooping(false);
+		    music.play();	
+		}
 	}
 
 	/************************************************/
@@ -216,5 +217,6 @@ public class World {
 	public boolean isPaused() {
 		return this.paused;
 	}
-
 }
+
+
