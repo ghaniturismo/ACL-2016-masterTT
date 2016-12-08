@@ -34,3 +34,10 @@
     - Score augmente lorsqu'on touche un alien par un tire.
     - L'affichage du score sur l'ecran du jeu.
     - GAME OVER et affichage du score a la fin du jeu lorsque le ship est mort.
+
+- Les fonctionalités du Sprint 5  [V3]:
+    - Ajout level lorsqu'on atteint un certain nombre de point.
+    - Ajout de vie pour le vaisseau.
+    - Ecran de Pause lorsqu'on click sur "ESC".
+    - Ajout du son lorsqu'on tire.
+    - Affichage level et vie.
