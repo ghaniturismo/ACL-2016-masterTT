@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 import com.badlogic.gdx.math.Vector2;
+import com.sun.org.apache.xpath.internal.SourceTree;
+
 import fr.ul.acl.model.GameElement.TypeElement;
 
 public class World {
@@ -13,11 +15,11 @@ public class World {
 	private float countShowAlien = 0;
 	private int score = 0;
 	private boolean gameover = false;
-
+	private int vie = 6;
 
 	public World() {
 		gameElements = new ArrayList<GameElement>();
-		this.ship = new Ship(new Vector2(15, 0), 20, TypeElement.SHIP);
+		this.ship = new Ship(new Vector2(world_size[1]/2, 0), 20, TypeElement.SHIP);
 		gameElements.add(this.ship);
 	}
 
@@ -53,7 +55,13 @@ public class World {
 					&& element.getTypeElement() != elementCompare.getTypeElement()) {
 					if (element.getTypeElement() == TypeElement.SHIP
 						|| elementCompare.getTypeElement() == TypeElement.SHIP) {
-						this.gameover = true;
+						this.vie = vie-1;
+						this.isDead();
+						gameElements = new ArrayList<GameElement>();
+						this.ship.setPosition(new Vector2(world_size[1]/2,0));
+						gameElements.add(this.ship);
+
+						
 					} else {
 						// on supprime le misile et l'alien
 						element.setRemove();
@@ -74,7 +82,9 @@ public class World {
 
 	// fonction qui renvoie l'etat du jeu
 	public boolean isGameover() {
+		
 		return gameover;
+		
 	}
 
 	/************************************************/
@@ -126,4 +136,11 @@ public class World {
 		return this.score;
 	}
 
+	//decremente la vie lorsque le vaisseau est mort.
+	public void isDead(){
+		if(vie==0){
+			this.gameover=true;
+		}
+	}
+	
 }
