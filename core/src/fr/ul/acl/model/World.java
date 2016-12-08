@@ -18,6 +18,7 @@ public class World {
 	private float countShowBonus = 0;
 	private int score = 0;
 	private boolean gameover = false;
+	private boolean paused = false;
 	private int vie = 6;
 	private int level = 1;
 	private float alienspeed = 10;
@@ -206,6 +207,14 @@ public class World {
 		if (vie == 0) {
 			this.gameover = true;
 		}
+	}
+
+	public void pause(boolean res) {
+		paused = res;
+	}
+
+	public boolean isPaused() {
+		return this.paused;
 	}
 
 }

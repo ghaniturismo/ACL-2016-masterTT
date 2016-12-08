@@ -49,8 +49,14 @@ public class GameListener implements InputProcessor {
 			world.shoot();
 			break;
 		case Input.Keys.ESCAPE:
-			Gdx.app.exit();
+			//Gdx.app.exit();
+			//*
+			if(world.isPaused())
+				world.pause(false);
+			else
+				world.pause(true);
 			break;
+			//*/
 		}
 		return true;
 	}
