@@ -13,7 +13,8 @@ public class World {
 	private float countShowAlien = 0;
 	private int score = 0;
 	private boolean gameover = false;
-
+	private int level = 1;
+	private float alienspeed = 10;
 
 	public World() {
 		gameElements = new ArrayList<GameElement>();
@@ -28,7 +29,7 @@ public class World {
 	public ArrayList<GameElement> getGameElements() {
 		return this.gameElements;
 	}
-	
+
 	public void setGameElements(ArrayList<GameElement> gameElements) {
 		this.gameElements = gameElements;
 	}
@@ -42,6 +43,7 @@ public class World {
 			this.countShowAlien = 0;
 		}
 		this.collisionElement();
+		level();
 	}
 
 	private void collisionElement() {
@@ -50,9 +52,10 @@ public class World {
 			for (GameElement elementCompare : this.gameElements) {
 				// on test s'il y a collision entre 2 elements differents
 				if (element.getBB().overlaps(elementCompare.getBB())
-					&& element.getTypeElement() != elementCompare.getTypeElement()) {
+						&& element.getTypeElement() != elementCompare
+								.getTypeElement()) {
 					if (element.getTypeElement() == TypeElement.SHIP
-						|| elementCompare.getTypeElement() == TypeElement.SHIP) {
+							|| elementCompare.getTypeElement() == TypeElement.SHIP) {
 						this.gameover = true;
 					} else {
 						// on supprime le misile et l'alien
@@ -75,6 +78,19 @@ public class World {
 	// fonction qui renvoie l'etat du jeu
 	public boolean isGameover() {
 		return gameover;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public void level() {
+		int tmp = score / 1000;
+		int leveltmp = tmp + 1;
+		if(this.level<leveltmp){
+			this.alienspeed += 5;
+			this.level = leveltmp;
+		}
 	}
 
 	/************************************************/
@@ -110,7 +126,8 @@ public class World {
 		// alien descend d'une position aléatoire
 		Random r = new Random();
 		int valeur = r.nextInt((int) world_size[0]);
-		this.gameElements.add(new Alien(new Vector2(valeur, world_size[1] - 1),10, TypeElement.ALIEN));
+		this.gameElements.add(new Alien(new Vector2(valeur, world_size[1] - 1),
+				alienspeed, TypeElement.ALIEN));
 	}
 
 	/************************************************/
@@ -121,7 +138,7 @@ public class World {
 		this.score += 50;
 	}
 
-	//renvoie le score du jeu.
+	// renvoie le score du jeu.
 	public int getScore() {
 		return this.score;
 	}

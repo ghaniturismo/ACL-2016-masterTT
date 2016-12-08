@@ -22,7 +22,7 @@ public class GameScreen extends ScreenAdapter {
 	private World w;
 	private SpaceInvaders mygame;
 	private BitmapFont font;
-	protected String score;
+	protected String score,level;
 
 	public GameScreen(SpaceInvaders jeux) {
 		this.mygame = jeux;
@@ -36,6 +36,7 @@ public class GameScreen extends ScreenAdapter {
 		this.camera = new OrthographicCamera();
 		this.font = new BitmapFont();
 		this.score = "Score :";
+		this.level = "Level :";
 		this.font.setColor(1.0f, 0.1f, 0.1f, 1.0f);
 		this.viewport = new FitViewport(this.world_width * ppux,
 				this.world_height * ppuy, camera);
@@ -61,6 +62,7 @@ public class GameScreen extends ScreenAdapter {
 		// affichage du score et nbre de vie
 		this.font.getData().setScale(3, 3);
 		this.font.draw(batch, score + this.w.getScore(), 2, this.world_height* ppuy);
+		this.font.draw(batch, level + this.w.getLevel(), (this.world_width-4)*ppux, this.world_height* ppuy);
 		w.update(delta);
 		this.batch.end();
 
