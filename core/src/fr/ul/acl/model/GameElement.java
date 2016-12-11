@@ -9,21 +9,12 @@ public abstract class  GameElement {
 	private Rectangle bounds;
 	private Vector2 position;
 	private float speed;
-	private TypeElement typeElement;
 	private boolean remove;
 	
-	public enum TypeElement {
-        SHIP,
-        MISSILE,
-        ALIEN,
-        BONUS;
-	}
-	
-	public GameElement(Vector2 position, float speed,TypeElement typeElement) {
+	public GameElement(Vector2 position, float speed) {
 		this.bounds = new Rectangle(position.x, position.y,1,1);
 		this.position = position;
 		this.speed = speed;
-		this.typeElement = typeElement;
 		this.remove = false;
 	}
 	
@@ -41,10 +32,6 @@ public abstract class  GameElement {
 
 	public void setSpeed(float speed) {
 		this.speed = speed;
-	}
-
-	public TypeElement getTypeElement() {
-		return typeElement;
 	}
 	
 	public Rectangle getBB() {

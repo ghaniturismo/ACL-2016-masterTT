@@ -1,4 +1,4 @@
-package fr.ul.acl.model;
+package fr.ul.acl.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -23,11 +23,11 @@ public class TextureFactory {
 	}
 
 	public Texture getTextureAlien(){
-		return  alien;
+		return alien;
 	}
 
 	public Texture getTextureBonus(){
-		return  bonus;
+		return bonus;
 	}
 	public Texture getTextureBullet() {
 		return bullet;

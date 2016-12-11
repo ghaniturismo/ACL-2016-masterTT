@@ -3,10 +3,12 @@ package fr.ul.acl.model;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
+import fr.ul.acl.view.TextureFactory;
+
 public class Bonus extends GameElement {
 
-	public Bonus(Vector2 position, float speed,TypeElement typeElement) {
-		super(position, speed, typeElement);
+	public Bonus(Vector2 position, float speed) {
+		super(position, speed);
 	}
 	
 	@Override

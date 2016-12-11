@@ -47,13 +47,9 @@ public class GameScreen extends ScreenAdapter {
 		this.level = "Level :";
 		this.vie = "Vie :   ";
 		this.font.setColor(1.0f, 0.1f, 0.1f, 1.0f);
-		this.viewport = new FitViewport(this.world_width * ppux,
-				this.world_height * ppuy, camera);
-		this.camera.position.set(this.world_width * ppux / 2.0f,
-				this.world_height * ppuy / 2.0f, 0);
+		this.viewport = new FitViewport(this.world_width * ppux,this.world_height * ppuy, camera);
+		this.camera.position.set(this.world_width * ppux / 2.0f,this.world_height * ppuy / 2.0f, 0);
 		this.camera.update();
-		
-		
 	}
 
 	public void resize(int width, int height) {
@@ -80,10 +76,7 @@ public class GameScreen extends ScreenAdapter {
 		//image du fond.
 		// affichage des elements
 		for (GameElement element : w.getGameElements())
-			batch.draw(element.getTexture(), element.getPosition().x * ppux,
-					element.getPosition().y * ppuy, ppux, ppuy);
-
-
+			batch.draw(element.getTexture(), element.getPosition().x * ppux,element.getPosition().y * ppuy, ppux, ppuy);
 		w.update(delta);
 		}
 		else {

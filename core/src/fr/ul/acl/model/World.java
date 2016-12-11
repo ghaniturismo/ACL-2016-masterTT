@@ -1,18 +1,19 @@
 package fr.ul.acl.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
+
+import javax.lang.model.element.TypeElement;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.Vector2;
 
-import fr.ul.acl.model.GameElement.TypeElement;
-
 public class World {
 	public static float world_size[] = { 30, 30 };
-	private ArrayList<GameElement> gameElements;
+	private HashMap<String,GameElement> mapElements;
 	private Ship ship;
 	private float countShowAlien = 0;
 	private float countShowBonus = 0;
@@ -27,10 +28,8 @@ public class World {
 
 
 	public World() {
-		gameElements = new ArrayList<GameElement>();
-		this.ship = new Ship(new Vector2(world_size[1] / 2, 0), 20,
-				TypeElement.SHIP);
-		gameElements.add(this.ship);
+		mapElements = new HashMap<String,GameElement>();
+		this.ship = new Ship(new Vector2(world_size[1] / 2, 0), 20);
 		this.music=Gdx.audio.newMusic(Gdx.files.internal("sounds/tir_tir_generic.mp3"));
 	}
 
@@ -38,12 +37,8 @@ public class World {
 	/********************* WORLD ********************/
 	/************************************************/
 
-	public ArrayList<GameElement> getGameElements() {
-		return this.gameElements;
-	}
-
-	public void setGameElements(ArrayList<GameElement> gameElements) {
-		this.gameElements = gameElements;
+	public HashMap<String,GameElement> getMapElements() {
+		return this.mapElements;
 	}
 
 	public void update(float delta) {
@@ -66,9 +61,7 @@ public class World {
 	private void addBonus(float delta) {
 		Random r = new Random();
 		int valeur = r.nextInt((int) world_size[0]);
-		this.gameElements.add(new Bonus(new Vector2(valeur, world_size[1] - 1),
-				this.bonusspeed, TypeElement.BONUS));
-
+		this.mapElements.put("Bonus",new Bonus(new Vector2(valeur, world_size[1] - 1),this.bonusspeed));
 	}
 
 	private void collisionElement() {
@@ -139,9 +132,8 @@ public class World {
 		if (this.level < leveltmp) {
 			this.alienspeed += 2;
 			this.bonusspeed += 2;
-			gameElements = new ArrayList<GameElement>();
+			mapElements = new HashMap<String,GameElement>();
 			this.ship.setPosition(new Vector2(world_size[1] / 2, 0));
-			gameElements.add(this.ship);
 			this.level = leveltmp;
 		}
 	}
@@ -171,7 +163,7 @@ public class World {
 	// ajouter un missile dans la liste
 	public void shoot() {
 		if(this.paused==false){
-			this.gameElements.add(new Missile(new Vector2(ship.getPosition().x, ship.getPosition().y + 1), 30, TypeElement.MISSILE));
+			this.ship.shoot();
 			music.setLooping(false);
 		    music.play();	
 		}
@@ -186,8 +178,7 @@ public class World {
 		// alien descend d'une position aléatoire
 		Random r = new Random();
 		int valeur = r.nextInt((int) world_size[0]);
-		this.gameElements.add(new Alien(new Vector2(valeur, world_size[1] - 1),
-				alienspeed, TypeElement.ALIEN));
+		this.mapElements.put("Alien",new Alien(new Vector2(valeur, world_size[1] - 1),alienspeed));
 	}
 
 	/************************************************/

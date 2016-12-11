@@ -1,24 +1,38 @@
 package fr.ul.acl.model;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+
+import fr.ul.acl.view.TextureFactory;
 
 public class Ship extends GameElement {
 	
 	private int direction;
 	private boolean isMoving;
+	private ArrayList<Missile> listeMissiles;
 
-	public Ship(Vector2 position, float speed,TypeElement typeElement) {
-		super(position, speed, typeElement);
+	public Ship(Vector2 position, float speed) {
+		super(position, speed);
 		this.isMoving = false;
+		this.listeMissiles = new ArrayList<Missile>();
 	}
 	
 	@Override
 	// recupere la texture d'un vaisseau.
 	public Texture getTexture() {
 		return TextureFactory.getInstance().getTextureShip();
+	}	
+	
+	public ArrayList<Missile> getListeMissiles() {
+		return listeMissiles;
 	}
 	
+	public void shoot(){
+		this.listeMissiles.add(new Missile(new Vector2(this.getPosition().x, this.getPosition().y + 1), 30));
+	}
+
 	// MAJ de la position des elements dans la fenetre.
 	public void update(float delta) {
 		float tmp = delta * this.getSpeed();
