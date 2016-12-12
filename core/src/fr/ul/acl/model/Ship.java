@@ -21,7 +21,7 @@ public class Ship extends GameElement {
 	}
 	
 	public void shoot(){
-		this.listeMissiles.add(new Missile(new Vector2(this.getPosition().x, this.getPosition().y + 1), 30));
+		this.listeMissiles.add(new Missile(new Vector2(this.getPosition().x, this.getPosition().y + 1), 30, true,null));
 	}
 
 	// MAJ de la position des elements dans la fenetre.

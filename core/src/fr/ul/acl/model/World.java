@@ -22,7 +22,7 @@ public class World {
 	private boolean paused = false;
 	private int vie = 3;
 	private int level = 1;
-	private float alienSpeed = 10;
+	private float alienSpeed = 5;
 	private float bonusSpeed = 10;
 	private Music music;
 
@@ -41,6 +41,7 @@ public class World {
 	}
 
 	public void update(float delta) {
+		Vector2 positionAlien = null;
 		ship.update(delta);
 		for(GameElement missileShip: ship.getListeMissiles()){
 			missileShip.update(delta);
@@ -48,10 +49,17 @@ public class World {
 		for(Map.Entry<String, ArrayList<GameElement>> entry : mapElements.entrySet()) {
 			for(GameElement element: entry.getValue()){
 				element.update(delta);
+				if(entry.getKey() == "Alien"){
+					Alien alien = (Alien) element;
+					if(alien.isShootAlien()){
+						positionAlien = alien.getPosition();
+						alien.setShootAlien();
+					}	
+				}
 			}
 		}
 		countShowAlien += delta;
-		if (countShowAlien > 0.8f) {
+		if (countShowAlien > 0.5f) {
 			this.addAlien(delta);
 			this.countShowAlien = 0;
 		}
@@ -60,9 +68,12 @@ public class World {
 			this.addBonus(delta);
 			this.countShowBonus = 0;
 		}
+		if(positionAlien != null){
+			this.addShootAlien(positionAlien,delta);
+		}
+		
 		this.collisionElement();
 		level();
-		System.out.println(vie);
 	}
 
 	private void addBonus(float delta) {
@@ -72,7 +83,7 @@ public class World {
 	}
 
 	private void collisionElement() {
-		Boolean init = false;
+		boolean init = false;
 		for(Map.Entry<String, ArrayList<GameElement>> entry : mapElements.entrySet()) {
 			String key = entry.getKey();
 			for(GameElement element: entry.getValue()){
@@ -92,6 +103,13 @@ public class World {
 							element.setRemove();
 							break;
 						}
+						case "Missile":{// s'il y a collision avec un missile ennemi on initiale la partie avec une vie en moins on initiale la partie avec une vie en moins
+							this.vie -= 1;
+							this.isDead();
+							init = true;
+							ship.setPosition(new Vector2(world_size[1] / 2, 0));
+							break;
+						}
 					}
 				}
 				// determine si un tire du vaisseau touche un element
@@ -107,6 +125,11 @@ public class World {
 							case "Bonus":{// si le tire touche un bonus on incremente sa vie 
 								this.addScore();
 								this.vie += 1;
+								element.setRemove();
+								missileShip.setRemove();
+								break;
+							}
+							case "Missile":{// si le tire touche un tire ennemi on supprime les 2 
 								element.setRemove();
 								missileShip.setRemove();
 								break;
@@ -175,7 +198,7 @@ public class World {
 	    	listeElement.add(element);
 	    	mapElements.put(key, listeElement);
 	    } else {
-	        // teste au prealable que notre element n'ai pas deja dans la liste 
+	        // teste au prealable que notre element n'est pas deja dans la liste 
 	        if(!listeElement.contains(element)){
 	        	listeElement.add(element);
 	        }
@@ -208,6 +231,11 @@ public class World {
 		    music.play();	
 		}
 	}
+	
+	private void addShootAlien(Vector2 position, float delta) {
+		this.addElement("Missile", new Missile(new Vector2(position.x,position.y-1),30, false,ship.getPosition()));
+	}
+
 
 	/************************************************/
 	/******************** ALIEN *********************/
