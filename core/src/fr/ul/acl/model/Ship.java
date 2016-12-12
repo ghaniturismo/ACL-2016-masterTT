@@ -2,10 +2,7 @@ package fr.ul.acl.model;
 
 import java.util.ArrayList;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
-
-import fr.ul.acl.view.TextureFactory;
 
 public class Ship extends GameElement {
 	
@@ -18,12 +15,6 @@ public class Ship extends GameElement {
 		this.isMoving = false;
 		this.listeMissiles = new ArrayList<Missile>();
 	}
-	
-	@Override
-	// recupere la texture d'un vaisseau.
-	public Texture getTexture() {
-		return TextureFactory.getInstance().getTextureShip();
-	}	
 	
 	public ArrayList<Missile> getListeMissiles() {
 		return listeMissiles;

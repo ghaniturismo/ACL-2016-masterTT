@@ -1,5 +1,8 @@
 package fr.ul.acl.view;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.audio.Music;
@@ -24,7 +27,6 @@ public class GameScreen extends ScreenAdapter {
 	private World w;
 	private SpaceInvaders mygame;
 	private BitmapFont font;
-	protected String score,level,vie;;
 	private Texture img, img2;
 	private Music music;
 
@@ -43,9 +45,6 @@ public class GameScreen extends ScreenAdapter {
 		this.world_height = World.world_size[1];
 		this.camera = new OrthographicCamera();
 		this.font = new BitmapFont();
-		this.score = "Score :";
-		this.level = "Level :";
-		this.vie = "Vie :   ";
 		this.font.setColor(1.0f, 0.1f, 0.1f, 1.0f);
 		this.viewport = new FitViewport(this.world_width * ppux,this.world_height * ppuy, camera);
 		this.camera.position.set(this.world_width * ppux / 2.0f,this.world_height * ppuy / 2.0f, 0);
@@ -61,34 +60,51 @@ public class GameScreen extends ScreenAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		this.camera.update();
 		this.batch.setProjectionMatrix(camera.combined);
+		
+		if (w.isGameover()) {
+			batch.dispose();
+			this.mygame.setEndScreen(w.getScore());
+		}
+		
 		this.batch.begin();
 		// affichage du score et nbre de vie
 		this.font.getData().setScale(3, 3);
-		this.font.draw(batch, score + this.w.getScore(), 2, this.world_height* ppuy);
-		this.font.draw(batch, level + this.w.getLevel(), (this.world_width-4)*ppux, this.world_height* ppuy);
-		this.font.draw(batch, vie + this.w.getVie(), (this.world_width-4)*ppux, (this.world_height-1)* ppuy);
+		this.font.draw(batch, "Score :" + this.w.getScore(), 2, this.world_height* ppuy);
+		this.font.draw(batch, "Level : " + this.w.getLevel(), (this.world_width-4)*ppux, this.world_height* ppuy);
+		this.font.draw(batch, "Vie :  " + this.w.getVie(), (this.world_width-4)*ppux, (this.world_height-1)* ppuy);
 		
 		//lance de music
         //music.setLooping(true);
         //music.play();
 		
 		if (!w.isPaused()) {
-		//image du fond.
-		// affichage des elements
-		for (GameElement element : w.getGameElements())
-			batch.draw(element.getTexture(), element.getPosition().x * ppux,element.getPosition().y * ppuy, ppux, ppuy);
-		w.update(delta);
-		}
-		else {
+			//image de fond 
+			this.batch.draw(img, 0, 0);
+			
+			Texture texture = TextureFactory.getInstance().getTextureShip();;
+			// affichage du ship et de ses missiles
+			batch.draw(texture, w.getShip().getPosition().x * ppux,w.getShip().getPosition().y * ppuy, ppux, ppuy);
+			texture = TextureFactory.getInstance().getTextureBullet();
+			for(GameElement element: w.getShip().getListeMissiles()){
+				batch.draw(texture, element.getPosition().x * ppux,element.getPosition().y * ppuy, ppux, ppuy);
+			}
+				
+			// affichage des elements
+			for(Map.Entry<String, ArrayList<GameElement>> entry : w.getMapElements().entrySet()) {
+				String key = entry.getKey();
+				switch(key){
+					case "Alien": texture = TextureFactory.getInstance().getTextureAlien();break;
+					case "Bonus": texture = TextureFactory.getInstance().getTextureBonus();break;
+				}
+				for(GameElement element: entry.getValue()){
+					batch.draw(texture, element.getPosition().x * ppux,element.getPosition().y * ppuy, ppux, ppuy);
+				}
+			}	
+			w.update(delta);
+		}else {
 			this.batch.draw(img2, 0, 0);
 		}
 		this.batch.end();
-		
-		if (w.isGameover()) {
-			batch.dispose();
-			this.mygame.setEndScreen(w.getScore());
-		}
-
 	}
 
 }

@@ -1,6 +1,5 @@
 package fr.ul.acl.model;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -46,7 +45,6 @@ public abstract class  GameElement {
 		this.remove = true;
 	}
 	
-	public abstract Texture getTexture();
 	public abstract void update(float delta);
     
 }
