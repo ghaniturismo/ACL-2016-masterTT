@@ -28,7 +28,7 @@ public class Alien extends GameElement {
 			this.setRemove();
 		}
 		countShootAlien += delta;
-		if (countShootAlien > 1f) {
+		if (countShootAlien > 0.5f) {
 			this.shootAlien = true;
 			this.countShootAlien = 0;
 		}

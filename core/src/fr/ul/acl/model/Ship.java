@@ -8,6 +8,7 @@ public class Ship extends GameElement {
 	
 	private int direction;
 	private boolean isMoving;
+	private int vie = 3;
 	private ArrayList<Missile> listeMissiles;
 
 	public Ship(Vector2 position, float speed) {
@@ -18,6 +19,18 @@ public class Ship extends GameElement {
 	
 	public ArrayList<Missile> getListeMissiles() {
 		return listeMissiles;
+	}
+	
+	public int getVie(){
+		return this.vie;
+	}
+	
+	public void upLife(){
+		this.vie += 1;
+	}
+	
+	public void downLife(){
+		this.vie -= 1;
 	}
 	
 	public void shoot(){

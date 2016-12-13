@@ -18,9 +18,8 @@ public class World {
 	private float countShowAlien = 0;
 	private float countShowBonus = 0;
 	private int score = 0;
-	private boolean gameover = false;
 	private boolean paused = false;
-	private int vie = 3;
+	
 	private int level = 1;
 	private float alienSpeed = 5;
 	private float bonusSpeed = 10;
@@ -91,21 +90,19 @@ public class World {
 				if (element.getBB().overlaps(ship.getBB())){
 					switch(key){
 						case "Alien":{// s'il y a collision avec un alien on initiale la partie avec une vie en moins
-							this.vie -= 1;
-							this.isDead();
+							this.ship.downLife();
 							init = true;
 							ship.setPosition(new Vector2(world_size[1] / 2, 0));
 							break;
 						}
 						case "Bonus":{// s'il y a collision avec un bonus on incremente le score 
 							this.addScore();
-							this.vie += 1;
+							this.ship.upLife();
 							element.setRemove();
 							break;
 						}
 						case "Missile":{// s'il y a collision avec un missile ennemi on initiale la partie avec une vie en moins on initiale la partie avec une vie en moins
-							this.vie -= 1;
-							this.isDead();
+							this.ship.downLife();
 							init = true;
 							ship.setPosition(new Vector2(world_size[1] / 2, 0));
 							break;
@@ -124,7 +121,7 @@ public class World {
 							}
 							case "Bonus":{// si le tire touche un bonus on incremente sa vie 
 								this.addScore();
-								this.vie += 1;
+								this.ship.upLife();
 								element.setRemove();
 								missileShip.setRemove();
 								break;
@@ -166,8 +163,16 @@ public class World {
 	}
 
 	// fonction qui renvoie l'etat du jeu
-	public boolean isGameover() {
-		return gameover;
+	public boolean isGameOver() {
+		return (this.ship.getVie() == 0)?true:false;
+	}
+
+	public void pause(boolean res) {
+		paused = res;
+	}
+
+	public boolean isPaused() {
+		return this.paused;
 	}
 
 	public int getLevel() {
@@ -187,7 +192,7 @@ public class World {
 	}
 
 	public int getVie() {
-		return this.vie;
+		return this.ship.getVie();
 	}
 	
 	private void addElement(String key, GameElement element){
@@ -261,20 +266,6 @@ public class World {
 		return this.score;
 	}
 
-	// decremente la vie lorsque le vaisseau est mort.
-	public void isDead() {
-		if (vie == 0) {
-			this.gameover = true;
-		}
-	}
-
-	public void pause(boolean res) {
-		paused = res;
-	}
-
-	public boolean isPaused() {
-		return this.paused;
-	}
 }
 
 

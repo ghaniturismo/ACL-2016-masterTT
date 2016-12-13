@@ -61,7 +61,7 @@ public class GameScreen extends ScreenAdapter {
 		this.camera.update();
 		this.batch.setProjectionMatrix(camera.combined);
 		
-		if (w.isGameover()) {
+		if (w.isGameOver()) {
 			batch.dispose();
 			this.mygame.setEndScreen(w.getScore());
 		}
