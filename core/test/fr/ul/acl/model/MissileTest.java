@@ -8,33 +8,30 @@ import org.junit.Test;
 
 import com.badlogic.gdx.math.Vector2;
 
-import fr.ul.acl.model.GameElement.TypeElement;
-
 public class MissileTest {
 	
 	private float speed;
 	private float delta = (float) 0.017519908;
 
-	// Test le nbr de missile crée
+	// Test le nbr de missile cree
 	@Test
 	public void missileNumber() {
 		World w = new World();
 		w.shoot();
 		w.shoot();
-		System.out.println(w.getGameElements().size());
-		//il y a la fusee dedans + nbre de missile creer
-		assertTrue(w.getGameElements().size() == 3);
+		Ship s = w.getShip();
+		assertTrue(s.getListeMissiles().size() == 2);
 	}
 	
-	// Test le mvt vers le haut
+	// Test le mvt vers le haut des tirs de la fusee
 	@Test
 	public void missileMove() {
 		World w = new World();
-		World world = new World();
-		Missile bullet = new Missile(new Vector2(0,0),30, TypeElement.ALIEN);
-		ArrayList<GameElement> gameElements = new ArrayList<GameElement>();
-		gameElements.add(bullet);
-		world.setGameElements(gameElements);
+		Ship ship = w.getShip();
+		Missile bullet = new Missile(new Vector2(0,0),30, true,null);
+		ArrayList<Missile> listeMissiles = new ArrayList<Missile>();
+		listeMissiles.add(bullet);
+		ship.setListeMissiles(listeMissiles);
 		speed = bullet.getSpeed();
 		float tmp = delta * speed;
 		float tmp1 = bullet.getPosition().y + tmp;

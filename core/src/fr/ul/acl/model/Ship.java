@@ -18,6 +18,12 @@ public class Ship extends GameElement {
 		this.listeMissiles = new ArrayList<Missile>();
 	}
 	
+	//maj de la liste de missile
+	public void setListeMissiles(ArrayList<Missile> listeMissiles) {
+		this.listeMissiles = listeMissiles;
+	}
+
+	//recuperation de la liste de missile
 	public ArrayList<Missile> getListeMissiles() {
 		return listeMissiles;
 	}
@@ -36,6 +42,11 @@ public class Ship extends GameElement {
 	public void downLife(){
 		if(this.vie>0)
 			this.vie -= 1;
+	}
+	
+	//maj nbre de vie
+	public void setLife(int res){
+		this.vie = res;
 	}
 	
 	//creation de missile

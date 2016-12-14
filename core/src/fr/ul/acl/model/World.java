@@ -24,20 +24,25 @@ public class World {
 	private float bonusSpeed = 10;
 	private float alienShootSpeed = 15;
 	private float shipSpeed = 20;
-	private Music music;
+	//private Music music = Gdx.audio.newMusic(Gdx.files.internal("sounds/tir_tir_generic.mp3"));
 
 	public World() {
 		mapElements = new HashMap<String,ArrayList<GameElement>>();
 		this.ship = new Ship(new Vector2(world_size[1] / 2, 0), shipSpeed);
-		this.music=Gdx.audio.newMusic(Gdx.files.internal("sounds/tir_tir_generic.mp3"));
 	}
 
 	/************************************************/
 	/********************* WORLD ********************/
 	/************************************************/
 
+	//recuperation du hashmap
 	public HashMap<String,ArrayList<GameElement>> getMapElements() {
 		return this.mapElements;
+	}
+	
+	//maj du hashmap
+	public void setMapElements(HashMap<String, ArrayList<GameElement>> mapElements) {
+		this.mapElements = mapElements;
 	}
 
 	//fct qui est appelée tous les delta et qui permet de maj les position,d'ajouter des tirs,alien,bonus... 
@@ -92,7 +97,7 @@ public class World {
 	private void addBonus(float delta) {
 		Random r = new Random();
 		int valeur = r.nextInt((int) world_size[0]);
-		this.addElement("Bonus", new Alien(new Vector2(valeur, world_size[1] - 1),this.bonusSpeed));
+		this.addElement("Bonus", new Bonus(new Vector2(valeur, world_size[1] - 1),this.bonusSpeed));
 	}
 
 	//test les collisons
@@ -246,6 +251,12 @@ public class World {
 	public void setShip(Ship ship) {
 		this.ship = ship;
 	}
+	
+	//maj nbre de vie
+	public void setLife(int res){
+		if(res>=0)
+			ship.setLife(res);
+	}
 
 	/************************************************/
 	/******************* MISSILE ********************/
@@ -255,8 +266,8 @@ public class World {
 	public void shoot() {
 		if(this.paused==false){
 			this.ship.shoot();
-			music.setLooping(false);
-		    music.play();	
+		//	music.setLooping(false);
+		  //  music.play();	
 		}
 	}
 	
@@ -281,6 +292,7 @@ public class World {
 	/******************** SCORE *********************/
 	/************************************************/
 
+	//incremente le score
 	public void addScore() {
 		this.score += 100;
 	}
@@ -290,6 +302,10 @@ public class World {
 		return this.score;
 	}
 
+	//maj le score 
+	public void setScore(int res){
+		this.score = res;
+	}
 }
 
 
