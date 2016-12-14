@@ -17,22 +17,27 @@ public abstract class  GameElement {
 		this.remove = false;
 	}
 	
+	//permet de recuper la position
 	public Vector2 getPosition() {
 		return position;
 	}
 
+	//maj la position
 	public void setPosition(Vector2 position) {
 		this.position = position;
 	}
 
+	//permet de recuperer la vitesse
 	public float getSpeed() {
 		return speed;
 	}
 
+	//maj la vitesse
 	public void setSpeed(float speed) {
 		this.speed = speed;
 	}
 	
+	//permet de recuperer la boundingbox
 	public Rectangle getBB() {
 		return bounds;
 	}
@@ -45,6 +50,7 @@ public abstract class  GameElement {
 		this.remove = true;
 	}
 	
+	//fct de maj des position...
 	public abstract void update(float delta);
     
 }

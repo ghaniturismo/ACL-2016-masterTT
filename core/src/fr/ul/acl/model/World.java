@@ -19,15 +19,16 @@ public class World {
 	private float countShowBonus = 0;
 	private int score = 0;
 	private boolean paused = false;
-	
 	private int level = 1;
 	private float alienSpeed = 5;
 	private float bonusSpeed = 10;
+	private float alienShootSpeed = 15;
+	private float shipSpeed = 20;
 	private Music music;
 
 	public World() {
 		mapElements = new HashMap<String,ArrayList<GameElement>>();
-		this.ship = new Ship(new Vector2(world_size[1] / 2, 0), 20);
+		this.ship = new Ship(new Vector2(world_size[1] / 2, 0), shipSpeed);
 		this.music=Gdx.audio.newMusic(Gdx.files.internal("sounds/tir_tir_generic.mp3"));
 	}
 
@@ -39,12 +40,17 @@ public class World {
 		return this.mapElements;
 	}
 
+	//fct qui est appelée tous les delta et qui permet de maj les position,d'ajouter des tirs,alien,bonus... 
 	public void update(float delta) {
 		Vector2 positionAlien = null;
+		//appel de la fct qui permet de maj la postion de la fusee
 		ship.update(delta);
+		//appel de la fct qui permet de maj la postion des missiles
 		for(GameElement missileShip: ship.getListeMissiles()){
 			missileShip.update(delta);
 		}
+		
+		//appel de la fct qui permet de maj la postion des aliens et de leurs tires
 		for(Map.Entry<String, ArrayList<GameElement>> entry : mapElements.entrySet()) {
 			for(GameElement element: entry.getValue()){
 				element.update(delta);
@@ -57,30 +63,39 @@ public class World {
 				}
 			}
 		}
+		
+		//appel de la fction qui permet de creer des aliens
 		countShowAlien += delta;
 		if (countShowAlien > 0.5f) {
 			this.addAlien(delta);
 			this.countShowAlien = 0;
 		}
+		
+		//appel de la fction qui permet de creer des bonus
 		countShowBonus += delta;
 		if (countShowBonus > 10f) {
 			this.addBonus(delta);
 			this.countShowBonus = 0;
 		}
+		
+		//on creer un tir pour l'alien
 		if(positionAlien != null){
 			this.addShootAlien(positionAlien,delta);
 		}
 		
+		//appel de la fct qui test les collisions
 		this.collisionElement();
 		level();
 	}
 
+	//creation d'un bonus
 	private void addBonus(float delta) {
 		Random r = new Random();
 		int valeur = r.nextInt((int) world_size[0]);
 		this.addElement("Bonus", new Alien(new Vector2(valeur, world_size[1] - 1),this.bonusSpeed));
 	}
 
+	//test les collisons
 	private void collisionElement() {
 		boolean init = false;
 		for(Map.Entry<String, ArrayList<GameElement>> entry : mapElements.entrySet()) {
@@ -167,35 +182,43 @@ public class World {
 		return (this.ship.getVie() == 0)?true:false;
 	}
 
+	//maj la valeur de pause
 	public void pause(boolean res) {
 		paused = res;
 	}
 
+	//permet  de savoir si on est en pause ou non
 	public boolean isPaused() {
 		return this.paused;
 	}
 
+	//permet de recuperer le level
 	public int getLevel() {
 		return level;
 	}
 
+	//maj le level tous les 1000points
 	public void level() {
 		int tmp = score / 1000;
 		int leveltmp = tmp + 1;
 		if (this.level < leveltmp) {
+			//augmentation de la vitesse des aliens,des bonus
 			this.alienSpeed += 2;
 			this.bonusSpeed += 2;
+			alienShootSpeed += 2;
+			//on supprime tous les elements present et la fusee a sa position init
 			mapElements.clear();
 			this.ship.setPosition(new Vector2(world_size[1] / 2, 0));
 			this.level = leveltmp;
 		}
 	}
 
+	//permet de recuperer le nbre de vie
 	public int getVie() {
 		return this.ship.getVie();
 	}
 	
-	private void addElement(String key, GameElement element){
+		private void addElement(String key, GameElement element){
 		ArrayList<GameElement> listeElement = mapElements.get(key);
 	    // si la liste n'existe pas on la creer sinon on ajoute notre element dans liste existante
 	    if(listeElement == null) {
@@ -237,8 +260,9 @@ public class World {
 		}
 	}
 	
+	// ajouter un missile a l'alien
 	private void addShootAlien(Vector2 position, float delta) {
-		this.addElement("Missile", new Missile(new Vector2(position.x,position.y-1),30, false,ship.getPosition()));
+		this.addElement("Missile", new Missile(new Vector2(position.x,position.y-1),alienShootSpeed, false,ship.getPosition()));
 	}
 
 
@@ -258,7 +282,7 @@ public class World {
 	/************************************************/
 
 	public void addScore() {
-		this.score += 50;
+		this.score += 100;
 	}
 
 	// renvoie le score du jeu.

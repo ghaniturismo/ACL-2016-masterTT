@@ -61,13 +61,14 @@ public class GameScreen extends ScreenAdapter {
 		this.camera.update();
 		this.batch.setProjectionMatrix(camera.combined);
 		
+		//test si le jeu est fini,si oui on passe a la fenetre de fin
 		if (w.isGameOver()) {
 			batch.dispose();
 			this.mygame.setEndScreen(w.getScore());
 		}
 		
 		this.batch.begin();
-		// affichage du score et nbre de vie
+		// affichage du score,lvl et nbre de vie
 		this.font.getData().setScale(3, 3);
 		this.font.draw(batch, "Score :" + this.w.getScore(), 2, this.world_height* ppuy);
 		this.font.draw(batch, "Level : " + this.w.getLevel(), (this.world_width-4)*ppux, this.world_height* ppuy);
@@ -77,16 +78,17 @@ public class GameScreen extends ScreenAdapter {
         //music.setLooping(true);
         //music.play();
 		
+		//si on est pas sur pause
 		if (!w.isPaused()) {
 			//image de fond 
 			this.batch.draw(img, 0, 0);
 			
-			Texture texture = TextureFactory.getInstance().getTextureShip();;
 			// affichage du ship et de ses missiles
+			Texture texture = TextureFactory.getInstance().getTextureShip();;
 			batch.draw(texture, w.getShip().getPosition().x * ppux,w.getShip().getPosition().y * ppuy, ppux, ppuy);
-			texture = TextureFactory.getInstance().getTextureBullet();
+			Texture texture_bullet = TextureFactory.getInstance().getTextureBullet();
 			for(GameElement element: w.getShip().getListeMissiles()){
-				batch.draw(texture, element.getPosition().x * ppux,element.getPosition().y * ppuy, ppux, ppuy);
+				batch.draw(texture_bullet, element.getPosition().x * ppux,element.getPosition().y * ppuy, ppux, ppuy);
 			}
 				
 			// affichage des elements
@@ -101,10 +103,15 @@ public class GameScreen extends ScreenAdapter {
 					batch.draw(texture, element.getPosition().x * ppux,element.getPosition().y * ppuy, ppux, ppuy);
 				}
 			}	
+			
+			//maj
 			w.update(delta);
+			
+			//on est sur pause, on affiche seulemnt une image et plus les sprites
 		}else {
 			this.batch.draw(img2, 0, 0);
 		}
+		
 		this.batch.end();
 	}
 

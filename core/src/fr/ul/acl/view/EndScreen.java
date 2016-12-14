@@ -37,15 +37,12 @@ public class EndScreen extends ScreenAdapter {
 	        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 	        this.camera.update();
 	        this.batch.setProjectionMatrix(camera.combined);
-	        this.batch.begin();
+	        this.batch.begin();       
 	        //on affiche l'image gameover
 	        this.batch.draw(img, 0, 0);
 	        this.font.getData().setScale(2,2);
 	        //on affiche le score
-	        this.font.draw(batch,"Vous avez obtenu " + this.score + " points", 100, img.getHeight());
-	        //this.font.draw(batch,"Vous avez obtenu " + this.score + " points"+"\nClic sur R pour rejouer !", 100, img.getHeight());
-	        
-	        
+	        this.font.draw(batch,"Vous avez obtenu " + this.score + " points", 100, img.getHeight());            
 	        this.batch.end();
 	}
 

@@ -8,6 +8,7 @@ public class Bonus extends GameElement {
 		super(position, speed);
 	}
 	
+	//maj de la position du bonus
 	@Override
 	public void update(float delta) {
 		float tmp = delta * this.getSpeed();

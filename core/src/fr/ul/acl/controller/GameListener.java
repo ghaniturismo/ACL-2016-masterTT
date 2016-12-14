@@ -8,7 +8,6 @@ import fr.ul.acl.model.World;
 
 public class GameListener implements InputProcessor {
 	private World world;
-	//private SpaceInvaders mygame;
 
 	public GameListener(World world) {
 		this.world = world;
@@ -34,28 +33,17 @@ public class GameListener implements InputProcessor {
 			ship.setDirection(2);
 			ship.stop(true);
 			break;
-		
-		//pour rejouer
-		
-		
-		/*case Input.Keys.R:
-			if(this.world.isGameover()){
-				this.mygame.setGameScreen();
-			}
-			break;
-		*/
+			//permet de tirer
 		case Input.Keys.SPACE:
 			world.shoot();
 			break;
+			//permet de faire pause ou reprendre selon l'etat
 		case Input.Keys.ESCAPE:
-			//Gdx.app.exit();
-			//*
 			if(world.isPaused())
 				world.pause(false);
 			else
 				world.pause(true);
 			break;
-			//*/
 		}
 		return true;
 	}

@@ -8,6 +8,7 @@ public class Ship extends GameElement {
 	
 	private int direction;
 	private boolean isMoving;
+	private float shootSpeed = 30;
 	private int vie = 3;
 	private ArrayList<Missile> listeMissiles;
 
@@ -21,20 +22,25 @@ public class Ship extends GameElement {
 		return listeMissiles;
 	}
 	
+	//recuperation le nbre de vie
 	public int getVie(){
 		return this.vie;
 	}
 	
+	//incrementer la vie de 1
 	public void upLife(){
 		this.vie += 1;
 	}
 	
+	//decrementer la vie de 1
 	public void downLife(){
-		this.vie -= 1;
+		if(this.vie>0)
+			this.vie -= 1;
 	}
 	
+	//creation de missile
 	public void shoot(){
-		this.listeMissiles.add(new Missile(new Vector2(this.getPosition().x, this.getPosition().y + 1), 30, true,null));
+		this.listeMissiles.add(new Missile(new Vector2(this.getPosition().x, this.getPosition().y + 1), shootSpeed, true,null));
 	}
 
 	// MAJ de la position des elements dans la fenetre.
@@ -65,6 +71,7 @@ public class Ship extends GameElement {
 		this.isMoving = m;
 	}
 
+	//maj de la direction
 	public void setDirection(int direction) {
 		this.direction = direction;
 	}

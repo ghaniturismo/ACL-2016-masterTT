@@ -11,14 +11,17 @@ public class Alien extends GameElement {
 		super(position, speed);
 	}
 	
+	//permet de savoir si l'alien a déjà tirer ou pas
 	public boolean isShootAlien(){
 		return this.shootAlien;
 	}
 	
+	//permet de maj shootAlien après qu'un alien à tirer
 	public void setShootAlien(){
 		this.shootAlien = false;
 	}
 	
+	//maj des position de l'alien
 	@Override
 	public void update(float delta) {
 		float tmp = delta * this.getSpeed();

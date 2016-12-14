@@ -14,6 +14,7 @@ public class Missile extends GameElement {
 			angle = Math.atan2(position.y - positionShip.y, position.x - positionShip.x);
 	}
 	
+	//maj des missiles
 	@Override
 	public void update(float delta) {
 		float tmp = delta * getSpeed();
