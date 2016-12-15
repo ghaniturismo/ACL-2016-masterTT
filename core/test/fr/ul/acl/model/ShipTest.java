@@ -172,7 +172,7 @@ public class ShipTest {
 			HashMap<String,ArrayList<GameElement>> mapElements =  w.getMapElements();
 			ArrayList<GameElement> listeElement = new ArrayList<GameElement>();
 	    	listeElement.add(missile);
-			mapElements.put("Missile",listeElement);
+			mapElements.put("MissileA",listeElement);
 			w.setMapElements(mapElements);
 			int tmp = w.getVie()-1;
 			w.update(delta);
