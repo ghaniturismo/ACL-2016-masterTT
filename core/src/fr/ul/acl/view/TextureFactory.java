@@ -13,6 +13,8 @@ public class TextureFactory {
 	private Texture bonus = new Texture(Gdx.files.internal("images/alien2.png"));
 	//image du missile
 	private Texture bullet = new Texture(Gdx.files.internal("images/bullet.png"));
+	//image background
+	private Texture background = new Texture(Gdx.files.internal("images/background.png"));
 
 	public static TextureFactory getInstance() {
 		return instance;
@@ -31,6 +33,9 @@ public class TextureFactory {
 	}
 	public Texture getTextureBullet() {
 		return bullet;
+	}
+	public Texture getTextureBackground() {
+		return background;
 	}
 	
 }

@@ -30,6 +30,7 @@ public class GameScreen extends ScreenAdapter {
 	private Texture img;
 	private Music music;
 
+	private ScrollingBackground scrollingBackground;
 
 	public GameScreen(SpaceInvaders jeux) {
 		this.mygame = jeux;
@@ -48,6 +49,7 @@ public class GameScreen extends ScreenAdapter {
 		this.viewport = new FitViewport(this.world_width * ppux,this.world_height * ppuy, camera);
 		this.camera.position.set(this.world_width * ppux / 2.0f,this.world_height * ppuy / 2.0f, 0);
 		this.camera.update();
+		scrollingBackground = new ScrollingBackground();
 	}
 
 	public void resize(int width, int height) {
@@ -67,6 +69,9 @@ public class GameScreen extends ScreenAdapter {
 		}
 		
 		this.batch.begin();
+		
+		this.scrollingBackground.updateAndRender(delta,this.batch);
+		
 		// affichage du score,level et nbre de vie
 		this.font.getData().setScale(3, 3);
 		this.font.draw(batch, "Score :" + this.w.getScore(), 2, this.world_height* ppuy);
