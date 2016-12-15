@@ -27,17 +27,16 @@ public class GameScreen extends ScreenAdapter {
 	private World w;
 	private SpaceInvaders mygame;
 	private BitmapFont font;
-	private Texture img, img2;
+	private Texture img;
 	private Music music;
 
 
 	public GameScreen(SpaceInvaders jeux) {
 		this.mygame = jeux;
-		this.music=Gdx.audio.newMusic(Gdx.files.internal("sounds/tir_tir_generic.mp3"));
+		this.music=Gdx.audio.newMusic(Gdx.files.internal("sounds/generic2.mp3"));
 		batch = new SpriteBatch();
 		this.w = new World();
-		this.img = new Texture("images/background_star.jpg");
-		this.img2 = new Texture("images/pause.png");
+		this.img = new Texture("images/pause.png");
 		Gdx.input.setInputProcessor(new GameListener(w));
 		this.ppux = 48;
 		this.ppuy = 48;
@@ -68,20 +67,18 @@ public class GameScreen extends ScreenAdapter {
 		}
 		
 		this.batch.begin();
-		// affichage du score,lvl et nbre de vie
+		// affichage du score,level et nbre de vie
 		this.font.getData().setScale(3, 3);
 		this.font.draw(batch, "Score :" + this.w.getScore(), 2, this.world_height* ppuy);
 		this.font.draw(batch, "Level : " + this.w.getLevel(), (this.world_width-4)*ppux, this.world_height* ppuy);
 		this.font.draw(batch, "Vie :  " + this.w.getVie(), (this.world_width-4)*ppux, (this.world_height-1)* ppuy);
 		
 		//lance de music
-        //music.setLooping(true);
-        //music.play();
+        music.setLooping(true);
+        music.play();
 		
 		//si on est pas sur pause
 		if (!w.isPaused()) {
-			//image de fond 
-			this.batch.draw(img, 0, 0);
 			
 			// affichage du ship et de ses missiles
 			Texture texture = TextureFactory.getInstance().getTextureShip();;
@@ -109,7 +106,8 @@ public class GameScreen extends ScreenAdapter {
 			
 			//on est sur pause, on affiche seulemnt une image et plus les sprites
 		}else {
-			this.batch.draw(img2, 0, 0);
+			this.batch.draw(img, 0, 0);
+			music.pause();
 		}
 		
 		this.batch.end();

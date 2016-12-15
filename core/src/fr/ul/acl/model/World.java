@@ -7,8 +7,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.Vector2;
 
 public class World {
@@ -24,8 +22,7 @@ public class World {
 	private float bonusSpeed = 10;
 	private float alienShootSpeed = 15;
 	private float shipSpeed = 20;
-	//private Music music = Gdx.audio.newMusic(Gdx.files.internal("sounds/tir_tir_generic.mp3"));
-
+	
 	public World() {
 		mapElements = new HashMap<String,ArrayList<GameElement>>();
 		this.ship = new Ship(new Vector2(world_size[1] / 2, 0), shipSpeed);
@@ -45,7 +42,7 @@ public class World {
 		this.mapElements = mapElements;
 	}
 
-	//fct qui est appelée tous les delta et qui permet de maj les position,d'ajouter des tirs,alien,bonus... 
+	//fct qui est appelï¿½e tous les delta et qui permet de maj les position,d'ajouter des tirs,alien,bonus... 
 	public void update(float delta) {
 		Vector2 positionAlien = null;
 		//appel de la fct qui permet de maj la postion de la fusee
@@ -266,8 +263,6 @@ public class World {
 	public void shoot() {
 		if(this.paused==false){
 			this.ship.shoot();
-		//	music.setLooping(false);
-		  //  music.play();	
 		}
 	}
 	
