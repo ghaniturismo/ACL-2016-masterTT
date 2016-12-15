@@ -45,7 +45,7 @@ public class ShipTest {
 	}
 
 	// Test le mvt a gauche dans le cas ou l'on est au debut de la fenetre
-	// pas de mvt normalement , il doit rester à sa position
+	// pas de mvt normalement , il doit rester ï¿½ sa position
 	@Test
 	public void shipLeft2() {
 		World w = new World();
@@ -58,7 +58,7 @@ public class ShipTest {
 	}
 
 	// Test le mvt a droite dans le cas ou l'on est a la fin de la fenetre
-	// pas de mvt normalement , il doit rester à sa position
+	// pas de mvt normalement , il doit rester ï¿½ sa position
 	@Test
 	public void shipRight2() {
 		World w = new World();
@@ -103,7 +103,7 @@ public class ShipTest {
 	}
 
 	// Test le mvt vers le bas dans le cas ou l'on est tous en bas
-	// pas de mvt normalement , il doit rester à sa position
+	// pas de mvt normalement , il doit rester ï¿½ sa position
 	@Test
 	public void shipDown2() {
 		World w = new World();
@@ -116,7 +116,7 @@ public class ShipTest {
 	}
 
 	// Test le mvt vers le haut dans le cas ou l'on est tous en haut 	
-	// pas de mvt normalement , il doit rester à sa position
+	// pas de mvt normalement , il doit rester ï¿½ sa position
 	@Test
 	public void shipUp2() {
 		World w = new World();
@@ -129,7 +129,7 @@ public class ShipTest {
 		assertTrue(tmp_h - 1 == ship.getPosition().y);
 	}
 	
-	// on verifie si y'a bien la détection de la collision entre l'alien et la fusee  et la maj du nbre de vie
+	// on verifie si y'a bien la dï¿½tection de la collision entre l'alien et la fusee  et la maj du nbre de vie
 	//on recupere la vie avant collision on soustrait 1 et on teste si c'est la meme que celle apres la collison
 		@Test
 		public void AlienCollisonShip() {
@@ -146,7 +146,7 @@ public class ShipTest {
 			assertTrue(tmp==w.getVie());
 		}
 		
-		//on verifie qu on passe a gameover quand le nbre de vie est égale a zero
+		//on verifie qu on passe a gameover quand le nbre de vie est egale a zero
 		@Test
 		public void gameOver() {
 			World w = new World();
@@ -154,7 +154,7 @@ public class ShipTest {
 			assertTrue(w.isGameOver());		
 		}
 		
-		//on verifie qu on met bien à jour le level quand on atteint 1000 points
+		//on verifie qu on met bien ï¿½ jour le level quand on atteint 1000 points
 		public void addScore() {
 			World w = new World();
 			int tmp = w.getLevel()+1;
@@ -163,6 +163,20 @@ public class ShipTest {
 			assertTrue(tmp==w.getLevel());
 		}
 		
-		
+		@Test
+		//test si le vaisseau perd une vie quand une balle le touche 
+		public void missileCollisonShip() {
+			World w = new World();
+			Ship ship = w.getShip();
+			Missile missile = new Missile(ship.getPosition(),10,true,null);
+			HashMap<String,ArrayList<GameElement>> mapElements =  w.getMapElements();
+			ArrayList<GameElement> listeElement = new ArrayList<GameElement>();
+	    	listeElement.add(missile);
+			mapElements.put("Missile",listeElement);
+			w.setMapElements(mapElements);
+			int tmp = w.getVie()-1;
+			w.update(delta);
+			assertTrue(tmp==w.getVie());
+		}
 		
 }
