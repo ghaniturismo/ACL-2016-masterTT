@@ -27,7 +27,7 @@ public class GameScreen extends ScreenAdapter {
 	private World w;
 	private SpaceInvaders mygame;
 	private BitmapFont font;
-	private Texture img;
+	private Texture img,img_fond;
 	private Music music;
 
 
@@ -36,6 +36,7 @@ public class GameScreen extends ScreenAdapter {
 		this.music=Gdx.audio.newMusic(Gdx.files.internal("sounds/generic2.mp3"));
 		batch = new SpriteBatch();
 		this.w = new World();
+		this.img_fond = new Texture("images/galaxie.jpg");
 		this.img = new Texture("images/pause.png");
 		Gdx.input.setInputProcessor(new GameListener(w));
 		this.ppux = 48;
@@ -67,12 +68,8 @@ public class GameScreen extends ScreenAdapter {
 		}
 		
 		this.batch.begin();
-		// affichage du score,level et nbre de vie
-		this.font.getData().setScale(3, 3);
-		this.font.draw(batch, "Score :" + this.w.getScore(), 2, this.world_height* ppuy);
-		this.font.draw(batch, "Level : " + this.w.getLevel(), (this.world_width-4)*ppux, this.world_height* ppuy);
-		this.font.draw(batch, "Vie :  " + this.w.getVie(), (this.world_width-4)*ppux, (this.world_height-1)* ppuy);
-		
+		this.batch.draw(img_fond,0,0,1500,1500);
+	
 		//lance de music
         music.setLooping(true);
         music.play();
@@ -95,6 +92,8 @@ public class GameScreen extends ScreenAdapter {
 					case "Alien": texture = TextureFactory.getInstance().getTextureAlien();break;
 					case "Bonus": texture = TextureFactory.getInstance().getTextureBonus();break;
 					case "Missile": texture = TextureFactory.getInstance().getTextureBullet();break;
+					case "MissileA": texture = TextureFactory.getInstance().getTextureBulletA();break;
+
 				}
 				for(GameElement element: entry.getValue()){
 					batch.draw(texture, element.getPosition().x * ppux,element.getPosition().y * ppuy, ppux, ppuy);
@@ -106,9 +105,15 @@ public class GameScreen extends ScreenAdapter {
 			
 			//on est sur pause, on affiche seulemnt une image et plus les sprites
 		}else {
-			this.batch.draw(img, 0, 0);
+			this.batch.draw(img,0,0,1500,1500);
 			music.pause();
 		}
+		
+		// affichage du score,level et nbre de vie
+		this.font.getData().setScale(3, 3);
+		this.font.draw(batch, "Score :" + this.w.getScore(), 2, this.world_height* ppuy);
+		this.font.draw(batch, "Level : " + this.w.getLevel(), (this.world_width-4)*ppux, this.world_height* ppuy);
+		this.font.draw(batch, "Vie :  " + this.w.getVie(), (this.world_width-4)*ppux, (this.world_height-1)* ppuy);
 		
 		this.batch.end();
 	}
