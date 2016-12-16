@@ -9,9 +9,9 @@ public class ScrollingBackground {
 	Texture texture;
 	float y1, y2;
 	int speed = 0;
-	int goalSpeed = 1000;
+	int goalSpeed = 500;
 	int speed_acceleration = 200;
-	float[] world_size = {1500 , 1000};
+	float[] world_size = {1920 , 1080};
 	float imageScale;
 	
 	public ScrollingBackground () {
