@@ -32,7 +32,7 @@ public class SpaceInvaders extends Game {
 	
 	// permet de passer a la fenetre de fin
 	public void setEndScreen(int score){
-		this.endScreen = new EndScreen(this,score);
+		this.endScreen = new EndScreen(score);
 		setScreen(endScreen);	
 	}
 

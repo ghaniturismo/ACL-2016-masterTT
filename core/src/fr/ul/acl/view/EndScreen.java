@@ -20,7 +20,7 @@ public class EndScreen extends ScreenAdapter {
 	private BitmapFont font;
 
 	// creation de la premiere page
-	public EndScreen(SpaceInvaders jeux,int score) {
+	public EndScreen(int score) {
 		this.batch = new SpriteBatch();
 		this.score = score;
 		this.font = new BitmapFont();
