@@ -41,3 +41,7 @@
     - Ecran de Pause lorsqu'on click sur "ESC".
     - Ajout du son lorsqu'on tire.
     - Affichage level et vie.
+
+- Les fonctionalités du Sprint 6  [V3.1]:
+    - Mouvement de background
+    - fix bug et modifification du code par rapport au consigne du prof.
