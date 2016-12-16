@@ -94,8 +94,6 @@ public class GameScreen extends ScreenAdapter {
 					case "Alien": texture = TextureFactory.getInstance().getTextureAlien();break;
 					case "Bonus": texture = TextureFactory.getInstance().getTextureBonus();break;
 					case "Missile": texture = TextureFactory.getInstance().getTextureBullet();break;
-					case "MissileA": texture = TextureFactory.getInstance().getTextureBulletA();break;
-
 				}
 				for(GameElement element: entry.getValue()){
 					batch.draw(texture, element.getPosition().x * ppux,element.getPosition().y * ppuy, ppux, ppuy);
