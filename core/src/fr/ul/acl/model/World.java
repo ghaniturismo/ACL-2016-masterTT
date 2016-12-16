@@ -118,7 +118,7 @@ public class World {
 							element.setRemove();
 							break;
 						}
-						case "MissileA":{// s'il y a collision avec un missile ennemi on initiale la partie avec une vie en moins on initiale la partie avec une vie en moins
+						case "Missile":{// s'il y a collision avec un missile ennemi on initiale la partie avec une vie en moins on initiale la partie avec une vie en moins
 							this.ship.downLife();
 							init = true;
 							ship.setPosition(new Vector2(world_size[1] / 2, 0));
@@ -143,7 +143,7 @@ public class World {
 								missileShip.setRemove();
 								break;
 							}
-							case "MissileA":{// si le tire touche un tire ennemi on supprime les 2 
+							case "Missile":{// si le tire touche un tire ennemi on supprime les 2 
 								element.setRemove();
 								missileShip.setRemove();
 								break;
@@ -268,7 +268,7 @@ public class World {
 	
 	// ajouter un missile a l'alien
 	private void addShootAlien(Vector2 position, float delta) {
-		this.addElement("MissileA", new Missile(new Vector2(position.x,position.y-1),alienShootSpeed, false,ship.getPosition()));
+		this.addElement("Missile", new Missile(new Vector2(position.x,position.y-1),alienShootSpeed, false,ship.getPosition()));
 	}
 
 

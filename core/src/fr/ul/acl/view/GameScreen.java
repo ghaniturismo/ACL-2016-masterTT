@@ -36,7 +36,6 @@ public class GameScreen extends ScreenAdapter {
 		this.music=Gdx.audio.newMusic(Gdx.files.internal("sounds/generic2.mp3"));
 		batch = new SpriteBatch();
 		this.w = new World();
-		//this.img_fond = new Texture("images/galaxie.jpg");
 		this.img = new Texture("images/pause.png");
 		Gdx.input.setInputProcessor(new GameListener(w));
 		this.ppux = 48;
@@ -69,7 +68,6 @@ public class GameScreen extends ScreenAdapter {
 		}
 		
 		this.batch.begin();
-		//this.batch.draw(img_fond,0,0,1500,1500);
 		this.scrollingBackground .updateAndRender(delta, this.batch);
 	
 		//lance de music
@@ -93,9 +91,7 @@ public class GameScreen extends ScreenAdapter {
 				switch(key){
 					case "Alien": texture = TextureFactory.getInstance().getTextureAlien();break;
 					case "Bonus": texture = TextureFactory.getInstance().getTextureBonus();break;
-					case "Missile": texture = TextureFactory.getInstance().getTextureBullet();break;
-					case "MissileA": texture = TextureFactory.getInstance().getTextureBulletA();break;
-
+					case "Missile": texture = TextureFactory.getInstance().getTextureBulletA();break;
 				}
 				for(GameElement element: entry.getValue()){
 					batch.draw(texture, element.getPosition().x * ppux,element.getPosition().y * ppuy, ppux, ppuy);

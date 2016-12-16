@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Missile extends GameElement {
 	
-	private boolean parent; // 0 = alien shoot | 1 = ship shoot
+	private boolean parent; // false = alien shoot | true = ship shoot
 	private double angle;
 
 	public Missile(Vector2 position, float speed, boolean parent, Vector2 positionShip) {
